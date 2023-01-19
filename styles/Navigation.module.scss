@@ -1,0 +1,32 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #cacaca;
+  width: 100%;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  height: 100%;
+  color: #6b7180;
+  cursor: pointer;
+
+  .active {
+    color: black;
+  }
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.label {
+  font-size: 14px;
+}
