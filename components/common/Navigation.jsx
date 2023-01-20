@@ -28,9 +28,7 @@ const NavButton = (props) => {
     <Link href={props.path}>
       <div
         className={
-          router.pathname === props.path
-            ? styles.navButton.active
-            : styles.navButton
+          router.pathname === props.path ? styles.active : styles.navButton
         }
       >
         <div className={styles.icon}>{props.icon}</div>
