@@ -1,23 +1,23 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import styles from "@/styles/Navigation.module.scss";
-import { useRouter } from "next/router";
 
 const navButtons = [
   {
     label: "기록",
     path: "/record",
-    icon: "아이콘",
+    icon: "/images/record.svg",
   },
   {
     label: "서재",
     path: "/library",
-    icon: "아이콘",
+    icon: "/images/library.svg",
   },
   {
     label: "내 정보",
     path: "/mypage",
-    icon: "아이콘",
+    icon: "/images/mypage.svg",
   },
 ];
 
@@ -31,8 +31,8 @@ const NavButton = (props) => {
           router.pathname === props.path ? styles.active : styles.navButton
         }
       >
-        <div className={styles.icon}>{props.icon}</div>
-        <span className={styles.label}>{props.label}</span>
+        <img className={styles.icon} src={props.icon} alt="아이콘" />
+        <div className={styles.label}>{props.label}</div>
       </div>
     </Link>
   );
