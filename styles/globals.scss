@@ -83,11 +83,14 @@
 
 html,
 body {
-  max-width: 100vw;
   overflow-x: hidden;
 }
 
 body {
+  width: 100%;
+  max-width: 475px;
+  min-width: 320px;
+  margin-bottom: 64px;
   color: rgb(var(--foreground-rgb));
   font-family: "Pretendard Variable";
 }
@@ -100,5 +103,13 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media (min-width: 475px) {
+  body {
+    width: 475px;
+    position: relative;
+    margin: auto;
   }
 }
