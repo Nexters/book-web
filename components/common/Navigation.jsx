@@ -5,9 +5,9 @@ import styles from "@/styles/Navigation.module.scss";
 
 const navButtons = [
   {
-    label: "기록",
-    path: "/record",
-    icon: "/images/record.svg",
+    label: "홈",
+    path: "/home",
+    icon: "/images/home.svg",
   },
   {
     label: "서재",

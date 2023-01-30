@@ -1,0 +1,41 @@
+.container {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.image {
+  width: 3.5rem;
+  height: 4.875rem;
+  border: 1px solid rgba(10, 10, 12, 0.08);
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #17171b;
+  line-height: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.memo_count {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #476bdb;
+}
+
+.detail {
+  cursor: pointer;
+}

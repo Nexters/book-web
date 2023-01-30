@@ -1,0 +1,41 @@
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem 1.5rem;
+}
+
+.banner_container {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  justify-content: center;
+}
+
+.banner {
+  border-radius: 0.75rem;
+  width: 20.5rem;
+  height: 11.5rem;
+}
+
+.button_container {
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.button_image {
+  width: 3.5rem;
+  height: 4.875rem;
+  border: 1px solid rgba(10, 10, 12, 0.08);
+  border-radius: 0.25rem;
+  background-color: rgba(217, 217, 217, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_content {
+  align-self: center;
+  margin-bottom: 0;
+  font-weight: 600;
+}
