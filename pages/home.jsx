@@ -93,10 +93,13 @@ function Home() {
     <div>
       <h2 className={styles.title}>홈</h2>
       <Banner />
-      {bookList.map((book) => (
-        <BookCard book={book} />
-      ))}
-      <AddBookButton handleClick={() => router.push("/search")} />
+      <div>
+        <h3 className={styles.subTitle}>읽는 중</h3>
+        {bookList.map((book) => (
+          <BookCard book={book} />
+        ))}
+        <AddBookButton handleClick={() => router.push("/search")} />
+      </div>
     </div>
   );
 }
