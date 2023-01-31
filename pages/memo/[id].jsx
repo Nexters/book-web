@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Memo.module.scss";
-import Button from "@/components/common/Buttton";
+import Button from "@/components/common/Button";
+import MemoCard from "@/components/common/MemoCard";
 
 // 더미 데이터
 const bookDetail = {
@@ -43,7 +44,7 @@ const memoList = [
       time: "string",
       valid: true,
     },
-    id: 0,
+    id: 1,
     text: "Lorem ipsum dolor sit amet consectetur. Phasellus nec dui dolor mattis malesuada. Tortor justo platea cursus amet mi magnis id. At nisi sed sed eros risus. Quam amet viverra duis ultricies adipiscing neque maecenas donec.",
     updatedAt: "string",
     userId: 0,
@@ -56,7 +57,7 @@ const memoList = [
       time: "string",
       valid: true,
     },
-    id: 0,
+    id: 2,
     text: "Lorem ipsum dolor sit amet consectetur. Phasellus nec dui dolor mattis malesuada. Tortor justo platea cursus amet mi magnis id. At nisi sed sed eros risus. Quam amet viverra duis ultricies adipiscing neque maecenas donec.",
     updatedAt: "string",
     userId: 0,
@@ -69,7 +70,7 @@ const memoList = [
       time: "string",
       valid: true,
     },
-    id: 0,
+    id: 3,
     text: "Lorem ipsum dolor sit amet consectetur. Phasellus nec dui dolor mattis malesuada. Tortor justo platea cursus amet mi magnis id. At nisi sed sed eros risus. Quam amet viverra duis ultricies adipiscing neque maecenas donec.",
     updatedAt: "string",
     userId: 0,
@@ -82,7 +83,7 @@ const memoList = [
       time: "string",
       valid: true,
     },
-    id: 0,
+    id: 4,
     text: "Lorem ipsum dolor sit amet consectetur. Phasellus nec dui dolor mattis malesuada. Tortor justo platea cursus amet mi magnis id. At nisi sed sed eros risus. Quam amet viverra duis ultricies adipiscing neque maecenas donec.",
     updatedAt: "string",
     userId: 0,
@@ -95,7 +96,7 @@ const memoList = [
       time: "string",
       valid: true,
     },
-    id: 0,
+    id: 5,
     text: "Lorem ipsum dolor sit amet consectetur. Phasellus nec dui dolor mattis malesuada. Tortor justo platea cursus amet mi magnis id. At nisi sed sed eros risus. Quam amet viverra duis ultricies adipiscing neque maecenas donec.",
     updatedAt: "string",
     userId: 0,
@@ -109,17 +110,9 @@ function Memo() {
   const [activeTag, setActiveTag] = useState(0);
   const [isModalSmallVisible, setModalSmallVisible] = useState(false);
   const [isModalBookVisible, setModalBookVisible] = useState(false);
-  const [isModalMemoVisible, setModalMemoVisible] = useState(false);
   const handleTagClick = (index) => setActiveTag(index);
   const handleModalSmall = () => setModalSmallVisible(!isModalSmallVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
-  const handleDropdown = (index) => {
-    if (event.target.value === "edit") {
-      // TODO: 수정 페이지 이동
-    } else if (event.target.value === "delete") {
-      setModalMemoVisible(true);
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -175,37 +168,6 @@ function Memo() {
           </div>
         </div>
       ) : null}
-      {isModalMemoVisible ? (
-        <div className={styles.modal_overlay}>
-          <div className={styles.modal_big}>
-            <div className={styles.modal_text_title}>메모를 삭제할까요?</div>
-            <div className={styles.modal_text_subtitle}>
-              삭제한 메모는 되돌릴 수 없어요
-            </div>
-            <div className={styles.modal_btn_container}>
-              <Button
-                backgroundColor="#E8EAEE"
-                color="#3D4350"
-                radius="12px"
-                padding="12px 24px"
-                fontSize="16px"
-                children={<div style={{ width: "70px" }}>취소</div>}
-                onClick={() => {
-                  setModalMemoVisible(false);
-                }}
-              />
-              <Button
-                backgroundColor="#CF3644"
-                color="#FFFFFF"
-                radius="12px"
-                padding="12px 24px"
-                fontSize="16px"
-                children={<div style={{ width: "70px" }}>삭제하기</div>}
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
       <div className={styles.book_detail_container}>
         <div className={styles.book_info}>
           <div className={styles.book_title}>{bookDetail.title}</div>
@@ -226,7 +188,7 @@ function Memo() {
       </div>
       <div className={styles.division}></div>
       <div className={styles.record_date_container}>
-        <div className={styles.memo_subtitle}>독서 기록</div>
+        <div className={styles.subtitle}>독서 기록</div>
         <div className={styles.record_complete}>🎉완독했어요!🎉</div>
         <div className={styles.date_container}>
           <div className={styles.date_title}>시작한 날짜</div>
@@ -238,8 +200,8 @@ function Memo() {
         </div>
       </div>
       <div className={styles.division}></div>
-      <div className={styles.memo_list_container}>
-        <div className={styles.memo_subtitle}>메모</div>
+      <div>
+        <div className={styles.subtitle_memo}>메모</div>
         {memoList.length === 0 ? (
           <div className={styles.memo_empty}>
             <img src="/images/article.svg" alt="article" />
@@ -270,27 +232,8 @@ function Memo() {
               ))}
             </div>
             <div className={styles.memo_list_count}>{memoList.length}개</div>
-            {memoList.map((memo, index) => (
-              <div key={index} className={styles.memo_container}>
-                <div className={styles.memo_topbar}>
-                  <div className={styles.memo_category}>#{memo.category}</div>
-                  <select
-                    name="option"
-                    className={styles.dropdown}
-                    onChange={() => handleDropdown(index)}
-                  >
-                    <option value="none"></option>
-                    <option value="edit" className={styles.option_edit}>
-                      메모 수정하기
-                    </option>
-                    <option value="delete" className={styles.option_delete}>
-                      메모 삭제하기
-                    </option>
-                  </select>
-                </div>
-                <div className={styles.memo_text}>{memo.text}</div>
-                <div className={styles.memo_createdAt}>{memo.createdAt}</div>
-              </div>
+            {memoList.map((memo) => (
+              <MemoCard key={memo.id} memo={memo} />
             ))}
           </div>
         )}

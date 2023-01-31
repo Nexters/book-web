@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Library.module.scss";
-import Button from "@/components/common/Buttton";
+import Button from "@/components/common/Button";
 import BookCard from "@/components/common/bookCard";
 
 // 더미 데이터
