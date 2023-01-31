@@ -26,13 +26,15 @@ const SearchInput = ({ value, handleChange }) => {
   );
 };
 
-const PopularKeywords = () => {
+const PopularKeywords = ({ handleClick }) => {
   return (
     <div className={styles.keywords}>
       <p className={styles.subTitle}>추천 검색어</p>
       <div className={styles.keyword_wrapper}>
         {keywords.map((keyword) => (
-          <div className={styles.keyword}>{keyword}</div>
+          <div className={styles.keyword} onClick={() => handleClick(keyword)}>
+            {keyword}
+          </div>
         ))}
       </div>
     </div>
@@ -69,7 +71,7 @@ function Search() {
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search, 300);
 
   const getSearchResult = async () => {
     const res = await axios.get(
@@ -96,7 +98,7 @@ function Search() {
       <SearchInput value={search} handleChange={setSearch} />
       {debouncedSearch.length === 0 ? (
         <>
-          <PopularKeywords />
+          <PopularKeywords handleClick={setSearch} />
           <RecommendBook />
         </>
       ) : (
