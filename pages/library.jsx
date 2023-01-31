@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 
 import styles from "@/styles/Library.module.scss";
 import Button from "@/components/common/Buttton";
+import BookCard from "@/components/common/bookCard";
 
 // 더미 데이터
 const bookList = [
   {
+    id: 0,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -22,6 +24,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 1,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -37,6 +40,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 2,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -52,6 +56,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 3,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -67,6 +72,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 4,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -82,6 +88,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 5,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -97,6 +104,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 6,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -112,6 +120,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 7,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -127,6 +136,7 @@ const bookList = [
     memo: 15,
   },
   {
+    id: 8,
     title:
       "NestJS로 배우는 백엔드 프로그래밍 (타입스크립트 환경의 차세대 서버 프레임워크를 만나다)",
     author: "한용재",
@@ -185,24 +195,8 @@ function Library() {
         ) : (
           <div>
             <div className={styles.bookList_count}>{bookList.length}개</div>
-            {bookList.map((book, index) => (
-              <div key={index} className={styles.book_container}>
-                <img
-                  src={book.image}
-                  alt="book_img"
-                  className={styles.book_img}
-                />
-                <div className={styles.book_title_container}>
-                  <div className={styles.book_title}>{book.title}</div>
-                  <div className={styles.book_memo_count}>메모 {book.memo}</div>
-                </div>
-                <img
-                  src="/images/rightArrow.svg"
-                  alt="detail"
-                  className={styles.book_detail}
-                  onClick={() => router.push(`/memo/${index}`)}
-                />
-              </div>
+            {bookList.map((book) => (
+              <BookCard key={book.id} book={book} />
             ))}
           </div>
         )}
