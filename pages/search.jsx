@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import useDebounce from "./hook/useDebounce";
-import BookCard from "./component/bookCard";
+import BookCard from "../components/common/bookCard";
 import data from "@/public/data/recommend.json";
 import styles from "@/styles/Search.module.scss";
 
@@ -50,6 +50,20 @@ const RecommendBook = () => {
   );
 };
 
+const NoResultView = () => (
+  <>
+    <PopularKeywords />
+    <div className={styles.noResult_container}>
+      <img src="/images/noResult.svg" alt="no result" width="96" height="96" />
+      <p className={styles.noResult_message}>
+        앗! 입력한 검색어에 대한
+        <br />
+        결과가 존재하지 않습니다.
+      </p>
+    </div>
+  </>
+);
+
 function Search() {
   const router = useRouter();
 
@@ -86,11 +100,17 @@ function Search() {
           <RecommendBook />
         </>
       ) : (
-        <div className="mt-3">
-          {results.map((result) => (
-            <BookCard key={result.isbn} book={result} isSearchCard />
-          ))}
-        </div>
+        <>
+          {results.length === 0 ? (
+            <NoResultView />
+          ) : (
+            <div className="mt-3">
+              {results.map((result) => (
+                <BookCard key={result.isbn} book={result} isSearchCard />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

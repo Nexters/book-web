@@ -71,3 +71,18 @@
 .recommend {
   margin-top: 2.25rem;
 }
+
+.noResult_container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.noResult_message {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #6b7180;
+}

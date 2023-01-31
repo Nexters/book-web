@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { Carousel } from "react-bootstrap";
 
-import BookCard from "./component/bookCard";
+import BookCard from "../components/common/bookCard";
 import styles from "@/styles/Home.module.scss";
 
 //NOTE: 배너 이미지 받고 수정 해야함

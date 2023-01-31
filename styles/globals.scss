@@ -93,6 +93,11 @@ body {
   margin-bottom: 64px;
   color: rgb(var(--foreground-rgb));
   font-family: "Pretendard Variable";
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {
