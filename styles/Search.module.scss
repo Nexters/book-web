@@ -19,7 +19,7 @@
 }
 
 .input_container {
-  padding: 1.875rem 1.5rem;
+  padding: 1.875rem 1.5rem 0 1.5rem;
   width: 100%;
 }
 
@@ -39,6 +39,10 @@
   font-size: 1rem;
   border: none;
   background: transparent;
+}
+
+.keywords {
+  margin-top: 1.875rem;
 }
 
 .keyword_wrapper {
