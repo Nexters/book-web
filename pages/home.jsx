@@ -96,7 +96,15 @@ function Home() {
       <div>
         <h3 className={styles.subTitle}>읽는 중</h3>
         {bookList.map((book) => (
-          <BookCard book={book} />
+          <BookCard
+            book={book}
+            handleClick={() =>
+              router.push({
+                pathname: "record",
+                query: { title: book.title },
+              })
+            }
+          />
         ))}
         <AddBookButton handleClick={() => router.push("/search")} />
       </div>
