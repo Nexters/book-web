@@ -155,8 +155,25 @@ const bookList = [
 
 const statusArr = ["읽는 중", "완독"];
 
-function Library() {
+const NoBookList = () => {
   const router = useRouter();
+  return (
+    <div className={styles.book_empty}>
+      <img src="/images/article.svg" alt="article" />
+      <div className={styles.book_empty_text}>아직 읽고 있는 책이 없어요</div>
+      <Button
+        backgroundColor="#17171B"
+        color="white"
+        radius="12px"
+        padding="12px 24px"
+        children="책 고르러가기"
+        onClick={() => router.push("/search")}
+      />
+    </div>
+  );
+};
+
+function Library() {
   const [activeIndex, setActiveIndex] = useState(0);
   const handleStatusClick = (index) => setActiveIndex(index);
 
@@ -179,19 +196,7 @@ function Library() {
       </div>
       <div className={styles.bookList_container}>
         {bookList.length === 0 ? (
-          <div className={styles.book_empty}>
-            <img src="/images/article.svg" alt="article" />
-            <div className={styles.book_empty_text}>
-              아직 읽고 있는 책이 없어요
-            </div>
-            <Button
-              backgroundColor="#17171B"
-              color="white"
-              radius="12px"
-              padding="12px 24px"
-              children="책 고르러가기"
-            />
-          </div>
+          <NoBookList />
         ) : (
           <div>
             <div className={styles.bookList_count}>{bookList.length}개</div>

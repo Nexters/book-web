@@ -105,6 +105,24 @@ const memoList = [
 
 const tagArr = ["전체", "느낀점", "배운점", "구절"];
 
+const NoMemoList = () => {
+  const router = useRouter();
+  return (
+    <div className={styles.memo_empty}>
+      <img src="/images/article.svg" alt="article" />
+      <div className={styles.memo_empty_text}>아직 메모가 없어요</div>
+      <Button
+        backgroundColor="#17171B"
+        color="white"
+        radius="12px"
+        padding="12px 24px"
+        children="메모하러 가기"
+        onClick={() => router.push("/record")}
+      />
+    </div>
+  );
+};
+
 function Memo() {
   const router = useRouter();
   const [activeTag, setActiveTag] = useState(0);
@@ -203,17 +221,7 @@ function Memo() {
       <div>
         <div className={styles.subtitle_memo}>메모</div>
         {memoList.length === 0 ? (
-          <div className={styles.memo_empty}>
-            <img src="/images/article.svg" alt="article" />
-            <div className={styles.memo_empty_text}>아직 메모가 없어요</div>
-            <Button
-              backgroundColor="#17171B"
-              color="white"
-              radius="12px"
-              padding="12px 24px"
-              children="메모하러 가기"
-            />
-          </div>
+          <NoMemoList />
         ) : (
           <div>
             <div className={styles.tag_container}>
