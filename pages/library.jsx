@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import styles from "@/styles/Library.module.scss";
 import Button from "@/components/common/Button";
 import BookCard from "@/components/common/bookCard";
+import Navigation from "@/components/common/Navigation";
 
 // 더미 데이터
 const bookList = [
@@ -174,6 +175,7 @@ const NoBookList = () => {
 };
 
 function Library() {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const handleStatusClick = (index) => setActiveIndex(index);
 
@@ -201,11 +203,16 @@ function Library() {
           <div>
             <div className={styles.bookList_count}>{bookList.length}개</div>
             {bookList.map((book) => (
-              <BookCard key={book.id} book={book} />
+              <BookCard
+                key={book.id}
+                book={book}
+                handleClick={() => router.push(`/memo/${book.id}`)}
+              />
             ))}
           </div>
         )}
       </div>
+      <Navigation />
     </div>
   );
 }
