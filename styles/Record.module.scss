@@ -11,6 +11,10 @@
   color: #cf3644;
 }
 
+.boldText {
+  font-weight: 600;
+}
+
 .header_container {
   padding: 0.625rem;
   display: flex;
@@ -28,8 +32,13 @@
 }
 
 .header_button {
-  font-weight: 600;
   color: #476bdb;
+  &_edit {
+    color: #0a0a0c;
+  }
+  &_disalbe {
+    color: #ccd0d7;
+  }
 }
 
 .textArea_container {

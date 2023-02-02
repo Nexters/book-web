@@ -6,16 +6,33 @@ import styles from "@/styles/Record.module.scss";
 
 const tags = ["#구절", "#느낀점"];
 
-const Header = ({ title, goBackHandler, finishHandler }) => {
+const Header = ({ title, goBackHandler, finishHandler, isEdit, isDisable }) => {
   return (
     <div className={styles.header_container}>
       <button>
         <img src="/images/backButton.svg" alt="back" onClick={goBackHandler} />
       </button>
-      <h6 className={styles.header_title}>{title}</h6>
-      <button onClick={finishHandler} className={styles.header_button}>
-        완독
-      </button>
+      <h6 className={styles.header_title}>{isEdit ? "메모 수정" : title}</h6>
+      {isEdit ? (
+        <button
+          onClick={finishHandler}
+          className={cn(
+            styles.boldText,
+            styles.header_button_edit,
+            isDisable && styles.header_button_disable,
+          )}
+          disabled={isDisable}
+        >
+          저장하기
+        </button>
+      ) : (
+        <button
+          onClick={finishHandler}
+          className={cn(styles.boldText, styles.header_button)}
+        >
+          완독
+        </button>
+      )}
     </div>
   );
 };
@@ -70,10 +87,10 @@ const Tags = ({ tag, setTag }) => {
   );
 };
 
-function Record() {
+function Record({ isEditPage, memoText, memoTag }) {
   const router = useRouter();
-  const [text, setText] = useState("");
-  const [tag, setTag] = useState("");
+  const [text, setText] = useState(memoText || "");
+  const [tag, setTag] = useState(memoTag || "");
   const [showPopUp, setShowPopUp] = useState(false);
   const isDisable = text.length > 150 || tag.length == 0;
 
@@ -87,7 +104,12 @@ function Record() {
   //NOTE: /record로 바로 접근 시 제목 데이터 가져올 수 없으므로 접근 제한이 필요할 듯 함.
   return (
     <div style={{ height: "100vh" }}>
-      <Header title={router.query.title} goBackHandler={() => router.back()} />
+      <Header
+        title={router.query.title}
+        goBackHandler={() => router.back()}
+        isEdit={isEditPage}
+        isDisable={isDisable}
+      />
       <TextArea text={text} setText={setText} />
       <div className={styles.division}></div>
       <Tags tag={tag} setTag={setTag} />
