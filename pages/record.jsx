@@ -31,29 +31,41 @@ const TextArea = ({ text, setText }) => {
         onChange={(e) => setText(e.target.value)}
         className={styles.textArea_text}
       />
-      <div className="d-flex flex-row-reverse justify-content-between">
-        <p
-          className={cn(isInValid && styles.warnText, "mb-0")}
-        >{`${text.length} / 150`}</p>
-        {isInValid && (
-          <p className={cn(isInValid && styles.warnText, "mb-0")}>
-            150자 이하로 써주세요
-          </p>
+      <div
+        className={cn(
+          "d-flex flex-row-reverse justify-content-between",
+          isInValid && styles.warnText,
         )}
+      >
+        <p className="mb-0">{`${text.length} / 150`}</p>
+        {isInValid && <p className="mb-0">150자 이하로 써주세요</p>}
       </div>
     </div>
   );
 };
 
-const Tags = () => {
+const Tags = ({ tag, setTag }) => {
   return (
     <div className={styles.tags_container}>
       <h6 className={styles.tags_title}>태그를 입력해주세요</h6>
       <div className="d-flex">
-        {tags.map((tag) => (
-          <div className={styles.tags_keyword}>{tag}</div>
+        {tags.map((item) => (
+          <div
+            className={cn(
+              styles.tags_keyword,
+              item === tag && styles.tags_selected,
+            )}
+            onClick={() => setTag(item)}
+          >
+            {item}
+          </div>
         ))}
       </div>
+      {tag.length === 0 && (
+        <p className={cn(styles.tags_warn, styles.warnText)}>
+          메모 저장하기 전 태그를 입력해주세요!
+        </p>
+      )}
     </div>
   );
 };
@@ -61,8 +73,16 @@ const Tags = () => {
 function Record() {
   const router = useRouter();
   const [text, setText] = useState("");
-  //const [tag, setTag] = useState();
-  //const isDisable = text.length>150 ||
+  const [tag, setTag] = useState("");
+  const [showPopUp, setShowPopUp] = useState(false);
+  const isDisable = text.length > 150 || tag.length == 0;
+
+  const handleSave = () => {
+    setShowPopUp(true);
+    setText("");
+    setTag("");
+    setTimeout(() => setShowPopUp(false), 3000);
+  };
 
   //NOTE: /record로 바로 접근 시 제목 데이터 가져올 수 없으므로 접근 제한이 필요할 듯 함.
   return (
@@ -70,8 +90,17 @@ function Record() {
       <Header title={router.query.title} goBackHandler={() => router.back()} />
       <TextArea text={text} setText={setText} />
       <div className={styles.division}></div>
-      <Tags />
-      <button className={styles.saveButton}>메모 저장하기</button>
+      <Tags tag={tag} setTag={setTag} />
+      <div className={styles.bottom}>
+        {showPopUp && <div className={styles.popUp}>메모가 저장되었어요.</div>}
+        <button
+          className={cn(styles.saveButton, isDisable && styles.disableButton)}
+          disabled={isDisable}
+          onClick={handleSave}
+        >
+          메모 저장하기
+        </button>
+      </div>
     </div>
   );
 }

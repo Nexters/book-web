@@ -1,3 +1,16 @@
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.warnText {
+  color: #cf3644;
+}
+
 .header_container {
   padding: 0.625rem;
   display: flex;
@@ -46,10 +59,6 @@
   background: #f7f8f9;
 }
 
-.warnText {
-  color: #cf3644;
-}
-
 .tags_container {
   padding: 1.5rem;
 }
@@ -72,9 +81,39 @@
   cursor: pointer;
 }
 
-.saveButton {
+.tags_warn {
+  font-size: 0.75rem;
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+
+.tags_selected {
+  color: #f7f8f9;
+  background: #17171b;
+}
+
+.bottom {
   position: absolute;
+  width: 100%;
   bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0 1.5rem;
+}
+
+.popUp {
+  animation: fadeout 3s;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(132, 139, 156, 0.95);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+}
+
+.saveButton {
   width: 100%;
   padding: 1rem;
   background: #0a0a0c;
@@ -82,4 +121,9 @@
   color: #fff;
   font-size: 1.125rem;
   font-weight: 600;
+}
+
+.disableButton {
+  background: rgba(10, 10, 12, 0.3);
+  color: #fff;
 }
