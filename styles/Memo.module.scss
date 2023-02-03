@@ -226,3 +226,21 @@
   font-size: 0.875rem;
   color: #6b7180;
 }
+
+.bottom {
+  position: absolute;
+  width: 100%;
+  bottom: 4rem;
+  padding: 0 1.5rem;
+  z-index: 4;
+}
+
+.popUp {
+  animation: fadeout 3s;
+  padding: 1rem;
+  background: rgba(23, 23, 27, 0.9);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+}

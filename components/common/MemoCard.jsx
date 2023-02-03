@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "@/styles/component/MemoCard.module.scss";
 import Button from "./Button";
 
-function MemoCard({ memo }) {
+function MemoCard({ memo, handleClick }) {
   const { id, category, text, updatedAt } = memo;
   const [isOptionVisible, setOptionVisible] = useState(false);
   const [isModalMemoVisible, setModalMemoVisible] = useState(false);
@@ -55,7 +55,7 @@ function MemoCard({ memo }) {
             />
             {isOptionVisible ? (
               <div className={styles.dropdown}>
-                <div className={styles.option_edit}>
+                <div className={styles.option_edit} onClick={handleClick}>
                   <img src="/images/edit.svg" alt="edit" />
                   <div>메모 수정하기</div>
                 </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Memo.module.scss";
@@ -128,9 +128,15 @@ function Memo() {
   const [activeTag, setActiveTag] = useState(0);
   const [isModalSmallVisible, setModalSmallVisible] = useState(false);
   const [isModalBookVisible, setModalBookVisible] = useState(false);
+  const [showPopUp, setShowPopUp] = useState(router.query.isEdited || false);
   const handleTagClick = (index) => setActiveTag(index);
   const handleModalSmall = () => setModalSmallVisible(!isModalSmallVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
+  useEffect(() => {
+    if (showPopUp) {
+      setTimeout(() => setShowPopUp(false), 3000);
+    }
+  }, [showPopUp]);
 
   return (
     <div className={styles.container}>
@@ -241,11 +247,33 @@ function Memo() {
             </div>
             <div className={styles.memo_list_count}>{memoList.length}개</div>
             {memoList.map((memo) => (
-              <MemoCard key={memo.id} memo={memo} />
+              <MemoCard
+                key={memo.id}
+                memo={memo}
+                handleClick={() =>
+                  router.push(
+                    {
+                      pathname: "/record",
+                      query: {
+                        id: memo.id,
+                        isEditPage: true,
+                        memoText: memo.text,
+                        memoTag: memo.category,
+                      },
+                    },
+                    `/edit?memoId=${memo.id}`,
+                  )
+                }
+              />
             ))}
           </div>
         )}
       </div>
+      {showPopUp && (
+        <div className={styles.bottom}>
+          <div className={styles.popUp}>메모가 수정되었어요.</div>
+        </div>
+      )}
     </div>
   );
 }
