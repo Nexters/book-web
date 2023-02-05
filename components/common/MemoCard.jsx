@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/component/MemoCard.module.scss";
 import Button from "./Button";
@@ -7,8 +7,22 @@ function MemoCard({ memo, handleClick }) {
   const { id, category, text, updatedAt } = memo;
   const [isOptionVisible, setOptionVisible] = useState(false);
   const [isModalMemoVisible, setModalMemoVisible] = useState(false);
+  const outsideRef = useRef(null);
   const handleOption = () => setOptionVisible(!isOptionVisible);
   const handleModalMemo = () => setModalMemoVisible(true);
+  const handleClickOutside = (event) => {
+    if (outsideRef.current && !outsideRef.current.contains(event.target)) {
+      setOptionVisible(false);
+    }
+  };
+  useEffect(() => {
+    if (isOptionVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [outsideRef, isOptionVisible]);
 
   return (
     <div>
@@ -46,7 +60,7 @@ function MemoCard({ memo, handleClick }) {
       <div key={id} className={styles.memo_container}>
         <div className={styles.memo_topbar}>
           <div className={styles.memo_category}>#{category}</div>
-          <div className={styles.dropdown_container}>
+          <div className={styles.dropdown_container} ref={outsideRef}>
             <img
               src="/images/more.svg"
               alt="option"
