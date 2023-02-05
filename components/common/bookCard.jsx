@@ -9,7 +9,7 @@ function BookCard({ book }) {
       <img src={image} alt="book_img" className={styles.image} />
       <div className={styles.contents}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.memo_count}>메모 {memo}</div>
+        <div className={styles.memo_count}>메모 {memo}개 기록 중</div>
       </div>
       <img
         src="/images/rightArrow.svg"

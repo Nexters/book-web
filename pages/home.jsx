@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 
 import { Carousel } from "react-bootstrap";
 
-import BookCard from "./component/bookCard";
+import BookCard from "../components/common/bookCard";
 import styles from "@/styles/Home.module.scss";
+import Navigation from "@/components/common/Navigation";
 
 //NOTE: 배너 이미지 받고 수정 해야함
 const bannerItems = [
@@ -59,21 +60,19 @@ const Banner = () => {
   };
 
   return (
-    <div className={styles.banner_container}>
-      <Carousel
-        activeIndex={index}
-        onSelect={handleSelect}
-        controls={false}
-        indicators={false}
-        className={styles.banner}
-      >
-        {bannerItems.map((item) => (
-          <Carousel.Item key={item.id} interval={4000}>
-            <img src={item.imageUrl} />
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </div>
+    <Carousel
+      activeIndex={index}
+      onSelect={handleSelect}
+      controls={false}
+      indicators={false}
+      className={styles.banner}
+    >
+      {bannerItems.map((item) => (
+        <Carousel.Item key={item.id} interval={4000}>
+          <img src={item.imageUrl} className={styles.banner_image} />
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 };
 
@@ -100,6 +99,7 @@ function Home() {
         ))}
         <AddBookButton handleClick={() => router.push("/search")} />
       </div>
+      <Navigation />
     </div>
   );
 }
