@@ -117,6 +117,13 @@ function Record() {
     setTimeout(() => setShowPopUp(false), 3000);
   };
 
+  const handleEditSave = () => {
+    router.push({
+      pathname: `memo/${id}`,
+      query: { isEdited: isEdited },
+    });
+  };
+
   //NOTE: /record로 바로 접근 시 제목 데이터 가져올 수 없으므로 접근 제한이 필요할 듯 함.
   return (
     <div style={{ height: "100vh" }}>
@@ -136,7 +143,7 @@ function Record() {
         <button
           className={cn(styles.saveButton, isDisable && styles.disableButton)}
           disabled={isDisable}
-          onClick={handleSave}
+          onClick={isEditPage ? handleEditSave : handleSave}
         >
           메모 저장하기
         </button>
