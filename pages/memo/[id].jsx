@@ -124,6 +124,7 @@ const NoMemoList = () => {
 };
 
 const Header = ({ moreHandler }) => {
+  const router = useRouter();
   return (
     <div className={styles.btn_container}>
       <img
