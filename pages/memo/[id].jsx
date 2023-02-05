@@ -123,12 +123,97 @@ const NoMemoList = () => {
   );
 };
 
+const Header = ({ moreHandler }) => {
+  return (
+    <div className={styles.btn_container}>
+      <img
+        src="/images/backButton.svg"
+        alt="back"
+        className={styles.btn}
+        onClick={() => router.back()}
+      />
+      <img
+        src="/images/more.svg"
+        alt="more"
+        className={styles.btn}
+        onClick={moreHandler}
+      />
+    </div>
+  );
+};
+
+const ModalSmall = ({ isModalSmallVisible, clickHandler }) => {
+  if (isModalSmallVisible) {
+    return (
+      <div className={styles.modal_small} onClick={clickHandler}>
+        <img src="/images/delete.svg" alt="delete" />
+        <div>책 삭제하기</div>
+      </div>
+    );
+  }
+};
+
+const ModalBook = ({ isModalBookVisible, cancelHandler, deleteHandler }) => {
+  if (isModalBookVisible) {
+    return (
+      <div className={styles.modal_overlay}>
+        <div className={styles.modal_big}>
+          <div className={styles.modal_text_title}>책을 삭제할까요?</div>
+          <div className={styles.modal_text_subtitle}>
+            삭제한 책은 되돌릴 수 없어요
+          </div>
+          <div className={styles.modal_btn_container}>
+            <Button
+              backgroundColor="#E8EAEE"
+              color="#3D4350"
+              radius="12px"
+              padding="12px 24px"
+              fontSize="16px"
+              children={<div style={{ width: "70px" }}>취소</div>}
+              onClick={cancelHandler}
+            />
+            <Button
+              backgroundColor="#CF3644"
+              color="#FFFFFF"
+              radius="12px"
+              padding="12px 24px"
+              fontSize="16px"
+              children={<div style={{ width: "70px" }}>삭제하기</div>}
+              onClick={deleteHandler}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
+
+const BookInfo = ({ title, author, publisher, image }) => {
+  return (
+    <div className={styles.book_detail_container}>
+      <div className={styles.book_info}>
+        <div className={styles.book_title}>{title}</div>
+        <div>
+          <div className={styles.book_author}>
+            <strong>저자</strong> {author}
+          </div>
+          <div className={styles.book_author}>
+            <strong>출판</strong> {publisher}
+          </div>
+        </div>
+      </div>
+      <img src={image} alt="book_image" className={styles.book_img} />
+    </div>
+  );
+};
+
 function Memo() {
   const router = useRouter();
   const [activeTag, setActiveTag] = useState(0);
   const [isModalSmallVisible, setModalSmallVisible] = useState(false);
   const [isModalBookVisible, setModalBookVisible] = useState(false);
   const [showPopUp, setShowPopUp] = useState(router.query.isEdited || false);
+  const [isReading, setIsReading] = useState(true);
   const handleTagClick = (index) => setActiveTag(index);
   const handleModalSmall = () => setModalSmallVisible(!isModalSmallVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
@@ -140,88 +225,40 @@ function Memo() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.btn_container}>
-        <img
-          src="/images/backButton.svg"
-          alt="back"
-          className={styles.btn}
-          onClick={() => router.back()}
-        />
-        <img
-          src="/images/more.svg"
-          alt="more"
-          className={styles.btn}
-          onClick={handleModalSmall}
-        />
-      </div>
-      {isModalSmallVisible ? (
-        <div className={styles.modal_small} onClick={handleModalBook}>
-          <img src="/images/delete.svg" alt="delete" />
-          <div>책 삭제하기</div>
-        </div>
-      ) : null}
-      {isModalBookVisible ? (
-        <div className={styles.modal_overlay}>
-          <div className={styles.modal_big}>
-            <div className={styles.modal_text_title}>책을 삭제할까요?</div>
-            <div className={styles.modal_text_subtitle}>
-              삭제한 책은 되돌릴 수 없어요
-            </div>
-            <div className={styles.modal_btn_container}>
-              <Button
-                backgroundColor="#E8EAEE"
-                color="#3D4350"
-                radius="12px"
-                padding="12px 24px"
-                fontSize="16px"
-                children={<div style={{ width: "70px" }}>취소</div>}
-                onClick={() => {
-                  setModalBookVisible(false);
-                  setModalSmallVisible(false);
-                }}
-              />
-              <Button
-                backgroundColor="#CF3644"
-                color="#FFFFFF"
-                radius="12px"
-                padding="12px 24px"
-                fontSize="16px"
-                children={<div style={{ width: "70px" }}>삭제하기</div>}
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
-      <div className={styles.book_detail_container}>
-        <div className={styles.book_info}>
-          <div className={styles.book_title}>{bookDetail.title}</div>
-          <div>
-            <div className={styles.book_author}>
-              <strong>저자</strong> {bookDetail.author}
-            </div>
-            <div className={styles.book_author}>
-              <strong>출판</strong> {bookDetail.publisher}
-            </div>
-          </div>
-        </div>
-        <img
-          src={bookDetail.image}
-          alt="book_image"
-          className={styles.book_img}
-        />
-      </div>
+      <Header moreHandler={handleModalSmall} />
+      <ModalSmall
+        isModalSmallVisible={isModalSmallVisible}
+        clickHandler={handleModalBook}
+      />
+      <ModalBook
+        isModalBookVisible={isModalBookVisible}
+        cancelHandler={() => {
+          setModalBookVisible(false);
+          setModalSmallVisible(false);
+        }}
+      />
+      <BookInfo
+        title={bookDetail.title}
+        author={bookDetail.author}
+        publisher={bookDetail.publisher}
+        image={bookDetail.image}
+      />
       <div className={styles.division}></div>
       <div className={styles.record_date_container}>
         <div className={styles.subtitle}>독서 기록</div>
-        <div className={styles.record_complete}>🎉완독했어요!🎉</div>
+        {!isReading && (
+          <div className={styles.record_complete}>🎉완독했어요!🎉</div>
+        )}
         <div className={styles.date_container}>
           <div className={styles.date_title}>시작한 날짜</div>
           <div className={styles.date}>YYYY.MM.DD</div>
         </div>
-        <div className={styles.date_container}>
-          <div className={styles.date_title}>마지막 날짜</div>
-          <div className={styles.date}>2023.01.28</div>
-        </div>
+        {memoList.length !== 0 && (
+          <div className={styles.date_container}>
+            <div className={styles.date_title}>마지막 날짜</div>
+            <div className={styles.date}>2023.01.28</div>
+          </div>
+        )}
       </div>
       <div className={styles.division}></div>
       <div>
