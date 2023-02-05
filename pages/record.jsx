@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
 
@@ -6,7 +6,7 @@ import styles from "@/styles/Record.module.scss";
 
 const tags = ["#구절", "#느낀점"];
 
-const Header = ({ title, goBackHandler, finishHandler, isEdit, isDisable }) => {
+const Header = ({ title, goBackHandler, isEdit, isDisable }) => {
   return (
     <div className={styles.header_container}>
       <button>
@@ -15,7 +15,7 @@ const Header = ({ title, goBackHandler, finishHandler, isEdit, isDisable }) => {
       <h6 className={styles.header_title}>{isEdit ? "메모 수정" : title}</h6>
       {isEdit ? (
         <button
-          onClick={finishHandler}
+          //onClick={}
           className={cn(
             styles.boldText,
             styles.header_button_edit,
@@ -27,7 +27,7 @@ const Header = ({ title, goBackHandler, finishHandler, isEdit, isDisable }) => {
         </button>
       ) : (
         <button
-          onClick={finishHandler}
+          //onClick={}
           className={cn(styles.boldText, styles.header_button)}
         >
           완독
@@ -37,20 +37,31 @@ const Header = ({ title, goBackHandler, finishHandler, isEdit, isDisable }) => {
   );
 };
 
-const TextArea = ({ text, setText }) => {
+const TextArea = ({ text, setText, setFocus }) => {
+  const textArea = useRef();
   const isInValid = text.length > 150;
+
+  const handleResizeHeight = (e) => {
+    setText(e.target.value);
+    textArea.current.style.height = "auto";
+    textArea.current.style.height = textArea.current.scrollHeight + "px";
+  };
+
   return (
     <div className={styles.textArea_container}>
       <textarea
-        rows={8}
+        rows={5}
         placeholder="메모를 입력해주세요"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        ref={textArea}
+        onChange={handleResizeHeight}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
         className={styles.textArea_text}
       />
       <div
         className={cn(
-          "d-flex flex-row-reverse justify-content-between",
+          "d-flex flex-row-reverse justify-content-between mt-3",
           isInValid && styles.warnText,
         )}
       >
@@ -87,12 +98,17 @@ const Tags = ({ tag, setTag }) => {
   );
 };
 
-function Record({ isEditPage, memoText, memoTag }) {
+function Record() {
   const router = useRouter();
+  const { id, title, memoText, memoTag, isEditPage } = router.query;
   const [text, setText] = useState(memoText || "");
   const [tag, setTag] = useState(memoTag || "");
+  const [focus, setFocus] = useState(false);
+
   const [showPopUp, setShowPopUp] = useState(false);
+
   const isDisable = text.length > 150 || tag.length == 0;
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   const handleSave = () => {
     setShowPopUp(true);
@@ -105,15 +121,17 @@ function Record({ isEditPage, memoText, memoTag }) {
   return (
     <div style={{ height: "100vh" }}>
       <Header
-        title={router.query.title}
+        title={title}
         goBackHandler={() => router.back()}
         isEdit={isEditPage}
         isDisable={isDisable}
       />
-      <TextArea text={text} setText={setText} />
+      <TextArea text={text} setText={setText} setFocus={setFocus} />
       <div className={styles.division}></div>
       <Tags tag={tag} setTag={setTag} />
-      <div className={styles.bottom}>
+      <div
+        className={cn(styles.bottom, isMobile && focus && styles.bottom_focus)}
+      >
         {showPopUp && <div className={styles.popUp}>메모가 저장되었어요.</div>}
         <button
           className={cn(styles.saveButton, isDisable && styles.disableButton)}

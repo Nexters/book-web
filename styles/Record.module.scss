@@ -104,11 +104,16 @@
 .bottom {
   position: absolute;
   width: 100%;
-  bottom: 5rem;
+  bottom: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   padding: 0 1.5rem;
+
+  &_focus {
+    //NOTE: 네이티브 프레임워크 아닌 곳에서 키보드 height를 구할 수 있는 방법이 현재까지 찾기가 어려워서 일단 임시로 부여한 값
+    bottom: 35%;
+  }
 }
 
 .popUp {
