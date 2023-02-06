@@ -1,6 +1,7 @@
 import styles from "@/styles/component/BookCard.module.scss";
 import { useRouter } from "next/router";
 
+
 function BookCard({ book, isSearchCard, handleClick }) {
   const router = useRouter();
   const { id, image, title, memo, author } = book;
@@ -28,7 +29,7 @@ function BookCard({ book, isSearchCard, handleClick }) {
       <img src={image} alt="book_img" className={styles.image} />
       <div className={styles.contents}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.memo_count}>메모 {memo}</div>
+        <div className={styles.memo_count}>메모 {memo}개 기록 중</div>
       </div>
       <img
         src="/images/rightArrow.svg"
