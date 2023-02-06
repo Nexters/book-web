@@ -49,7 +49,6 @@ function Mypage() {
         <Status count="999" type="메모" />
         <Status count="999d" type="읽은날" />
       </div>
-      <Menu isEmail />
       <div className={styles.division}></div>
       <div>
         <Menu
