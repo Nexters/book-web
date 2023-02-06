@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 
 function BookCard({ book, isSearchCard, handleClick }) {
-  const router = useRouter();
   const { id, image, title, memo, author } = book;
 
   if (isSearchCard) {
@@ -35,7 +34,7 @@ function BookCard({ book, isSearchCard, handleClick }) {
         src="/images/rightArrow.svg"
         alt="detail"
         className={styles.detail}
-        onClick={() => router.push(`/memo/${id}`)}
+        onClick={handleClick}
       />
     </div>
   );
