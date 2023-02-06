@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { Carousel } from "react-bootstrap";
 
+import OnBoarding from "./onboarding";
 import BookCard from "../components/common/bookCard";
 import styles from "@/styles/Home.module.scss";
 import Navigation from "@/components/common/Navigation";
@@ -87,6 +88,16 @@ const AddBookButton = ({ handleClick }) => (
 
 function Home() {
   const router = useRouter();
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("userToken");
+    setToken(accessToken);
+  }, []);
+
+  if (!token) {
+    return <OnBoarding />;
+  }
 
   return (
     <div>
