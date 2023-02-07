@@ -1,0 +1,47 @@
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem 1.5rem;
+}
+
+.subTitle {
+  padding: 1.5rem 0 0.5rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.banner {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.banner_image {
+  width: 100%;
+  min-height: 11.5rem;
+  object-fit: fill;
+}
+
+.button_container {
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.button_image {
+  width: 3.5rem;
+  height: 4.875rem;
+  border: 1px solid rgba(10, 10, 12, 0.08);
+  border-radius: 0.25rem;
+  background-color: rgba(217, 217, 217, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_content {
+  align-self: center;
+  margin-bottom: 0;
+  font-weight: 600;
+}

@@ -1,5 +1,5 @@
-import Record from "./record";
+import Home from "./home";
 
-export default function Home() {
-  return <Record />;
+export default function Main() {
+  return <Home />;
 }

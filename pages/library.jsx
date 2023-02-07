@@ -202,13 +202,16 @@ function Library() {
         ) : (
           <div>
             <div className={styles.bookList_count}>{bookList.length}개</div>
-            {bookList.map((book) => (
-              <BookCard
-                key={book.id}
-                book={book}
-                handleClick={() => router.push(`/memo/${book.id}`)}
-              />
-            ))}
+            <div className={styles.library_container}>
+              {bookList.map((book) => (
+                <BookCard
+                  key={book.id}
+                  book={book}
+                  handleClick={() => router.push(`/memo/${book.id}`)}
+                  isLibraryCard
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

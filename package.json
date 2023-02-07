@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@next/font": "13.1.2",
+    "axios": "^1.2.6",
+    "classnames": "^2.3.2",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.2",
     "next": "13.1.2",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "18.2.0",
     "sass": "^1.57.1"
   },
