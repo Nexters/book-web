@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { Carousel } from "react-bootstrap";
 
-import BookCard from "../components/common/bookCard";
+import OnBoarding from "@/pages/home/onboarding";
+import BookCard from "@/components/common/bookCard";
 import styles from "@/styles/Home.module.scss";
 import Navigation from "@/components/common/Navigation";
 
@@ -55,23 +56,6 @@ const AddBookButton = ({ handleClick }) => (
 
 function Home() {
   const router = useRouter();
-  const [books, setBooks] = useState([]);
-
-  const getBookList = async () => {
-    const {
-      data: { books },
-    } = await axios.get(`/api/books?isReading=true`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-      },
-      withCredentials: true,
-    });
-    setBooks(books);
-  };
-
-  useEffect(() => {
-    getBookList();
-  }, []);
 
   return (
     <div>
@@ -91,7 +75,7 @@ function Home() {
             }
           />
         ))}
-        <AddBookButton handleClick={() => router.push("/search")} />
+        <AddBookButton handleClick={() => router.push("/home/search")} />
       </div>
       <Navigation />
     </div>

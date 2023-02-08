@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Home from "./home";
-import OnBoarding from "./onboarding";
+import OnBoarding from "./home/onboarding";
 
 export default function Main() {
   const [token, setToken] = useState(null);
