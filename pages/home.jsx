@@ -60,7 +60,7 @@ function Home() {
   const getBookList = async () => {
     const {
       data: { books },
-    } = await axios.get("/books?isReading=true", {
+    } = await axios.get(`/api/books?isReading=true`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
