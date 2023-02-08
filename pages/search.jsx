@@ -32,7 +32,11 @@ const PopularKeywords = ({ handleClick }) => {
       <p className={styles.subTitle}>추천 검색어</p>
       <div className={styles.keyword_wrapper}>
         {keywords.map((keyword) => (
-          <div className={styles.keyword} onClick={() => handleClick(keyword)}>
+          <div
+            key={keyword}
+            className={styles.keyword}
+            onClick={() => handleClick(keyword)}
+          >
             {keyword}
           </div>
         ))}

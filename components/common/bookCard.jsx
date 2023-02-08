@@ -1,5 +1,4 @@
 import styles from "@/styles/component/BookCard.module.scss";
-import { useRouter } from "next/router";
 
 function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
   const { id, image, title, memo, author } = book;
@@ -33,7 +32,7 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
   }
 
   return (
-    <div key={id} className={styles.container}>
+    <div className={styles.container}>
       <img src={image} alt="book_img" className={styles.image} />
       <div className={styles.contents}>
         <div className={styles.title}>{title}</div>
