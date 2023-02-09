@@ -13,11 +13,11 @@ import Navigation from "@/components/common/Navigation";
 const bannerItems = [
   {
     id: 1,
-    imageUrl: "/images/banner.png",
+    imageUrl: "/images/banner1.svg",
   },
   {
     id: 2,
-    imageUrl: "/images/banner.png",
+    imageUrl: "/images/banner2.svg",
   },
 ];
 
