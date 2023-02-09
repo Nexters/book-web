@@ -4,7 +4,7 @@ import styles from "@/styles/component/MemoCard.module.scss";
 import Button from "./Button";
 
 function MemoCard({ memo, handleClick }) {
-  const { id, category, text, updatedAt } = memo;
+  const { id, category, text, UpdatedAt } = memo;
   const [isOptionVisible, setOptionVisible] = useState(false);
   const [isModalMemoVisible, setModalMemoVisible] = useState(false);
   const outsideRef = useRef(null);
@@ -82,7 +82,7 @@ function MemoCard({ memo, handleClick }) {
           </div>
         </div>
         <div className={styles.memo_text}>{text}</div>
-        <div className={styles.memo_updatedAt}>{updatedAt}</div>
+        <div className={styles.memo_updatedAt}>{UpdatedAt}</div>
       </div>
     </div>
   );
