@@ -75,8 +75,6 @@ function Home() {
     getBookList();
   }, []);
 
-  console.log(books);
-
   return (
     <div>
       <h2 className={styles.title}>홈</h2>
@@ -85,7 +83,7 @@ function Home() {
         <h3 className={styles.subTitle}>읽는 중</h3>
         {books.map((book) => (
           <BookCard
-            key={book.id}
+            key={book.ID}
             book={book}
             handleClick={() =>
               router.push({

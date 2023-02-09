@@ -83,6 +83,20 @@ function Search() {
   const debouncedSearch = useDebounce(search, 300);
 
   const registerBook = async ({ ISBN, title }) => {
+    const {
+      data: { books },
+    } = await axios.get(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=true`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+    if (books.findIndex((book) => book.ISBN === ISBN) !== -1) {
+      return;
+    }
+
     await axios.post(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/books`,
       {
