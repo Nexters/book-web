@@ -234,26 +234,29 @@ function Memo() {
               ))}
             </div>
             <div className={styles.memo_list_count}>{memoList.length}개</div>
-            {memoList.map((memo) => (
-              <MemoCard
-                key={memo.ID}
-                memo={memo}
-                handleClick={() =>
-                  router.push(
-                    {
-                      pathname: "/record",
-                      query: {
-                        id: memo.ID,
-                        isEditPage: true,
-                        memoText: memo.text,
-                        memoTag: memo.category,
+            {memoList
+              .slice(0)
+              .reverse()
+              .map((memo) => (
+                <MemoCard
+                  key={memo.ID}
+                  memo={memo}
+                  handleClick={() =>
+                    router.push(
+                      {
+                        pathname: "/record",
+                        query: {
+                          id: memo.ID,
+                          isEditPage: true,
+                          memoText: memo.text,
+                          memoTag: memo.category,
+                        },
                       },
-                    },
-                    `/edit?memoId=${memo.ID}`,
-                  )
-                }
-              />
-            ))}
+                      `/edit?memoId=${memo.ID}`,
+                    )
+                  }
+                />
+              ))}
           </div>
         )}
       </div>

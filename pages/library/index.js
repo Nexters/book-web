@@ -82,22 +82,25 @@ function Library() {
           <div>
             <div className={styles.bookList_count}>{bookList.length}개</div>
             <div className={styles.library_container}>
-              {bookList.map((book) => (
-                <BookCard
-                  key={book.ID}
-                  book={book}
-                  handleClick={() =>
-                    router.push(
-                      {
-                        pathname: `/library/memo/${book.ID}`,
-                        query: { bookId: book.ID },
-                      },
-                      `/library/memo/${book.ID}`,
-                    )
-                  }
-                  isLibraryCard
-                />
-              ))}
+              {bookList
+                .slice(0)
+                .reverse()
+                .map((book) => (
+                  <BookCard
+                    key={book.ID}
+                    book={book}
+                    handleClick={() =>
+                      router.push(
+                        {
+                          pathname: `/library/memo/${book.ID}`,
+                          query: { bookId: book.ID },
+                        },
+                        `/library/memo/${book.ID}`,
+                      )
+                    }
+                    isLibraryCard
+                  />
+                ))}
             </div>
           </div>
         )}
