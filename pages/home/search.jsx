@@ -45,12 +45,17 @@ const PopularKeywords = ({ handleClick }) => {
   );
 };
 
-const RecommendBook = () => {
+const RecommendBook = ({ handleClick }) => {
   return (
     <div className={styles.recommend}>
       <p className={styles.subTitle}>추천 책</p>
       {data.book.map((book) => (
-        <BookCard key={book.isbn} book={book} isSearchCard />
+        <BookCard
+          key={book.isbn}
+          book={book}
+          isSearchCard
+          handleClick={handleClick}
+        />
       ))}
     </div>
   );
@@ -77,14 +82,51 @@ function Search() {
   const [results, setResults] = useState([]);
   const debouncedSearch = useDebounce(search, 300);
 
+  const registerBook = async ({ ISBN, title }) => {
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books`,
+      {
+        ISBN,
+        title,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+  };
+
+  const processReading = async ({ ISBN, title }) => {
+    const {
+      data: { books },
+    } = await axios.get(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=false`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+    if (books.findIndex((book) => book.ISBN === ISBN) !== -1) {
+      router.push("/library");
+      return;
+    }
+    registerBook({ ISBN, title });
+    router.push({
+      pathname: "/record",
+      query: { title },
+    });
+  };
+
   const getSearchResult = async () => {
-    const res = await axios.get(
+    const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/books/search`,
       {
         params: { title: debouncedSearch },
       },
     );
-    setResults(res.data);
+    setResults(data);
   };
 
   useEffect(() => {
@@ -103,7 +145,7 @@ function Search() {
       {debouncedSearch.length === 0 ? (
         <>
           <PopularKeywords handleClick={setSearch} />
-          <RecommendBook />
+          <RecommendBook handleClick={processReading} />
         </>
       ) : (
         <>
@@ -112,7 +154,12 @@ function Search() {
           ) : (
             <div className="mt-3">
               {results.map((result) => (
-                <BookCard key={result.isbn} book={result} isSearchCard />
+                <BookCard
+                  key={result.isbn}
+                  book={result}
+                  isSearchCard
+                  handleClick={processReading}
+                />
               ))}
             </div>
           )}

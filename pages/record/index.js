@@ -1,12 +1,16 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
+import axios from "axios";
 
 import styles from "@/styles/Record.module.scss";
 
-const tags = ["#구절", "#느낀점"];
+const tags = [
+  { kor: "#구절", eng: "quote" },
+  { kor: "#느낀점", eng: "comment" },
+];
 
-const Header = ({ title, goBackHandler, isEdit, isDisable }) => {
+const Header = ({ title, goBackHandler, isEdit, isDisable, handleClick }) => {
   return (
     <div className={styles.header_container}>
       <button>
@@ -15,7 +19,8 @@ const Header = ({ title, goBackHandler, isEdit, isDisable }) => {
       <h6 className={styles.header_title}>{isEdit ? "메모 수정" : title}</h6>
       {isEdit ? (
         <button
-          //onClick={}
+          // NOTE : 메모 수정 API 붙일 예정
+          // onClick={}
           className={cn(
             styles.boldText,
             styles.header_button_edit,
@@ -27,7 +32,7 @@ const Header = ({ title, goBackHandler, isEdit, isDisable }) => {
         </button>
       ) : (
         <button
-          //onClick={}
+          onClick={handleClick}
           className={cn(styles.boldText, styles.header_button)}
         >
           완독
@@ -81,11 +86,11 @@ const Tags = ({ tag, setTag }) => {
           <div
             className={cn(
               styles.tags_keyword,
-              item === tag && styles.tags_selected,
+              item.eng === tag && styles.tags_selected,
             )}
-            onClick={() => setTag(item)}
+            onClick={() => setTag(item.eng)}
           >
-            {item}
+            {item.kor}
           </div>
         ))}
       </div>
@@ -100,20 +105,53 @@ const Tags = ({ tag, setTag }) => {
 
 function Record() {
   const router = useRouter();
+
   const { id, title, memoText, memoTag, isEditPage } = router.query;
   const [text, setText] = useState(memoText || "");
-  const [tag, setTag] = useState(memoTag || "");
+  const [category, setCategory] = useState(memoTag || "");
   const [focus, setFocus] = useState(false);
 
   const [showPopUp, setShowPopUp] = useState(false);
 
-  const isDisable = text.length > 150 || tag.length == 0;
+  const isDisable = text.length > 150 || category.length == 0;
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  const postMemo = async () => {
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/memos`,
+      {
+        bookId: Number(id),
+        category,
+        text,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+  };
+
+  const finishReading = async () => {
+    await axios.patch(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${id}`,
+      {
+        isReading: false,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+    router.push("/library");
+  };
+
   const handleSave = () => {
+    postMemo();
     setShowPopUp(true);
     setText("");
-    setTag("");
+    setCategory("");
     setTimeout(() => setShowPopUp(false), 3000);
   };
 
@@ -132,10 +170,11 @@ function Record() {
         goBackHandler={() => router.back()}
         isEdit={isEditPage}
         isDisable={isDisable}
+        handleClick={finishReading}
       />
       <TextArea text={text} setText={setText} setFocus={setFocus} />
       <div className={styles.division}></div>
-      <Tags tag={tag} setTag={setTag} />
+      <Tags tag={category} setTag={setCategory} />
       <div
         className={cn(styles.bottom, isMobile && focus && styles.bottom_focus)}
       >

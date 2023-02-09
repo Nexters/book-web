@@ -57,6 +57,28 @@ const AddBookButton = ({ handleClick }) => (
 function Home() {
   const router = useRouter();
 
+  const [books, setBooks] = useState([]);
+
+  const getBookList = async () => {
+    const {
+      data: { books },
+    } = await axios.get(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=true`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+    setBooks(books);
+  };
+
+  useEffect(() => {
+    getBookList();
+  }, []);
+
+  console.log(books);
+
   return (
     <div>
       <h2 className={styles.title}>홈</h2>
@@ -70,7 +92,7 @@ function Home() {
             handleClick={() =>
               router.push({
                 pathname: "record",
-                query: { title: book.title },
+                query: { title: book.title, id: book.ID },
               })
             }
           />
