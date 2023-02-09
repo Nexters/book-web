@@ -6,7 +6,20 @@ import styles from "@/styles/Memo.module.scss";
 import Button from "@/components/common/Button";
 import MemoCard from "@/components/common/MemoCard";
 
-const tagArr = ["전체", "느낀점", "배운점", "구절"];
+const tagArr = [
+  {
+    title: "전체",
+    category: "",
+  },
+  {
+    title: "책 속 문장",
+    category: "quote",
+  },
+  {
+    title: "느낀점",
+    category: "comment",
+  },
+];
 
 const NoMemoList = () => {
   const router = useRouter();
@@ -125,10 +138,9 @@ function Memo() {
 
   const getMemoList = async () => {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${router.query.bookId}`,
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${router.query.bookId}?category=${tagArr[activeTag].category}`,
       {
         headers: {
-          //todo: localstorage에 저장된 토큰으로 변경
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
       },
@@ -139,7 +151,7 @@ function Memo() {
 
   useEffect(() => {
     getMemoList();
-  }, []);
+  }, [activeTag]);
 
   useEffect(() => {
     if (showPopUp) {
@@ -175,19 +187,23 @@ function Memo() {
         )}
         <div className={styles.date_container}>
           <div className={styles.date_title}>시작한 날짜</div>
-          <div className={styles.date}>{bookDetail.CreatedAt}</div>
+          <div className={styles.date}>
+            {bookDetail.CreatedAt.substring(0, 10)}
+          </div>
         </div>
         {memoList.length !== 0 && (
           <div className={styles.date_container}>
             <div className={styles.date_title}>마지막 날짜</div>
-            <div className={styles.date}>{bookDetail.UpdatedAt}</div>
+            <div className={styles.date}>
+              {bookDetail.UpdatedAt.substring(0, 10)}
+            </div>
           </div>
         )}
       </div>
       <div className={styles.division}></div>
       <div>
         <div className={styles.subtitle_memo}>메모</div>
-        {memoList.length === 0 ? (
+        {bookDetail.memoCount === 0 ? (
           <NoMemoList />
         ) : (
           <div>
@@ -202,7 +218,7 @@ function Memo() {
                       : styles.tag_btn_deSelected
                   }
                 >
-                  {tag}
+                  {tag.title}
                 </div>
               ))}
             </div>

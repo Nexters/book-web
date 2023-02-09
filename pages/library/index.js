@@ -47,7 +47,6 @@ function Library() {
       `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=${statusArr[activeIndex].isReading}`,
       {
         headers: {
-          //todo: localstorage에 저장된 토큰으로 변경
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
       },
