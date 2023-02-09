@@ -136,6 +136,20 @@ function Memo() {
   const handleModalSmall = () => setModalSmallVisible(!isModalSmallVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
 
+  const deleteBook = async () => {
+    const res = await axios.delete(
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${router.query.bookId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      },
+    );
+    if (res.status === 202) {
+      router.back();
+    }
+  };
+
   const getMemoList = async () => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${router.query.bookId}?category=${tagArr[activeTag].category}`,
@@ -172,6 +186,7 @@ function Memo() {
           setModalBookVisible(false);
           setModalSmallVisible(false);
         }}
+        deleteHandler={deleteBook}
       />
       <BookInfo
         title={bookDetail.title}
@@ -187,16 +202,12 @@ function Memo() {
         )}
         <div className={styles.date_container}>
           <div className={styles.date_title}>시작한 날짜</div>
-          <div className={styles.date}>
-            {bookDetail.CreatedAt.substring(0, 10)}
-          </div>
+          <div className={styles.date}>{bookDetail.CreatedAt}</div>
         </div>
         {memoList.length !== 0 && (
           <div className={styles.date_container}>
             <div className={styles.date_title}>마지막 날짜</div>
-            <div className={styles.date}>
-              {bookDetail.UpdatedAt.substring(0, 10)}
-            </div>
+            <div className={styles.date}>{bookDetail.UpdatedAt}</div>
           </div>
         )}
       </div>
