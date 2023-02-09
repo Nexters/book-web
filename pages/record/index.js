@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
 
@@ -104,11 +104,15 @@ function Record() {
   const [text, setText] = useState(memoText || "");
   const [tag, setTag] = useState(memoTag || "");
   const [focus, setFocus] = useState(false);
-
   const [showPopUp, setShowPopUp] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const isDisable = text.length > 150 || tag.length == 0;
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  useEffect(() => {
+    const result = navigator.userAgent.match(/iPhone | iPad | iPod | Android/i);
+    setIsMobile(result);
+  }, []);
 
   const handleSave = () => {
     setShowPopUp(true);
