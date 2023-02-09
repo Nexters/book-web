@@ -4,12 +4,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { Carousel } from "react-bootstrap";
 
-import OnBoarding from "@/pages/home/onboarding";
 import BookCard from "@/components/common/bookCard";
 import styles from "@/styles/Home.module.scss";
 import Navigation from "@/components/common/Navigation";
 
-//NOTE: 배너 이미지 받고 수정 해야함
 const bannerItems = [
   {
     id: 1,

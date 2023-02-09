@@ -6,8 +6,8 @@ import axios from "axios";
 import styles from "@/styles/Record.module.scss";
 
 const tags = [
-  { kor: "#구절", eng: "quote" },
-  { kor: "#느낀점", eng: "comment" },
+  { kor: "책 속 문장", eng: "quote" },
+  { kor: "느낀점", eng: "comment" },
 ];
 
 const Header = ({ title, goBackHandler, isEdit, isDisable, handleClick }) => {
@@ -148,7 +148,7 @@ function Record() {
   };
 
   const handleSave = () => {
-    postMemo();
+    //postMemo();
     setShowPopUp(true);
     setText("");
     setCategory("");
@@ -158,13 +158,14 @@ function Record() {
   const handleEditSave = () => {
     router.push({
       pathname: `memo/${id}`,
-      query: { isEdited: isEdited },
+      query: { isEdited: true },
     });
   };
 
   //NOTE: /record로 바로 접근 시 제목 데이터 가져올 수 없으므로 접근 제한이 필요할 듯 함.
   return (
-    <div style={{ height: "100vh" }}>
+    <div className={styles.record_container}>
+      {showPopUp && <div className={styles.popUp}>메모가 저장되었어요.</div>}
       <Header
         title={title}
         goBackHandler={() => router.back()}
@@ -178,7 +179,6 @@ function Record() {
       <div
         className={cn(styles.bottom, isMobile && focus && styles.bottom_focus)}
       >
-        {showPopUp && <div className={styles.popUp}>메모가 저장되었어요.</div>}
         <button
           className={cn(styles.saveButton, isDisable && styles.disableButton)}
           disabled={isDisable}
