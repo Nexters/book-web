@@ -161,7 +161,7 @@ function Record() {
 
   const handleEditSave = () => {
     router.push({
-      pathname: `memo/${id}`,
+      pathname: `/library/memo/${id}`,
       query: { isEdited: true },
     });
   };
