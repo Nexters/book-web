@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
+
 import styles from "@/styles/Mypage.module.scss";
 import Navigation from "@/components/common/Navigation";
 
@@ -40,14 +43,28 @@ const Menu = (props) => {
 
 function Mypage() {
   const router = useRouter();
+  const [userInfo, setUserInfo] = useState([]);
+
+  const getUserInfo = async () => {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_ENDPOINT}/users`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      },
+    });
+    setUserInfo(res.data);
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <div>
       <div className={styles.title}>내정보</div>
       <div className={styles.status_container}>
-        <Status count="999" type="완독" />
-        <Status count="999" type="메모" />
-        <Status count="999d" type="읽은날" />
+        <Status count={userInfo.readCount} type="완독" />
+        <Status count={userInfo.memoCount} type="메모" />
+        <Status count={userInfo.duration + "d"} type="읽은날" />
       </div>
       <div className={styles.division}></div>
       <div>
