@@ -152,7 +152,7 @@ function Record() {
   };
 
   const handleSave = () => {
-    //postMemo();
+    postMemo();
     setShowPopUp(true);
     setText("");
     setCategory("");
