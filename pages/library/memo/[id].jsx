@@ -138,7 +138,9 @@ function Memo() {
 
   const deleteBook = async () => {
     const res = await axios.delete(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${router.query.bookId}`,
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${Number(
+        router.asPath.substring(14),
+      )}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -152,7 +154,9 @@ function Memo() {
 
   const getMemoList = async () => {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${router.query.bookId}?category=${tagArr[activeTag].category}`,
+      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${Number(
+        router.asPath.substring(14),
+      )}?category=${tagArr[activeTag].category}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -164,8 +168,9 @@ function Memo() {
   };
 
   useEffect(() => {
+    if (!router.isReady) return;
     getMemoList();
-  }, [activeTag]);
+  }, [router.isReady, activeTag]);
 
   useEffect(() => {
     if (showPopUp) {

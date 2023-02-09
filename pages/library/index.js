@@ -89,15 +89,7 @@ function Library() {
                   <BookCard
                     key={book.ID}
                     book={book}
-                    handleClick={() =>
-                      router.push(
-                        {
-                          pathname: `/library/memo/${book.ID}`,
-                          query: { bookId: book.ID },
-                        },
-                        `/library/memo/${book.ID}`,
-                      )
-                    }
+                    handleClick={() => router.push(`/library/memo/${book.ID}`)}
                     isLibraryCard
                   />
                 ))}
