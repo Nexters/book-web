@@ -47,7 +47,7 @@ const Header = ({ moreHandler }) => {
         src="/images/backButton.svg"
         alt="back"
         className={styles.btn}
-        onClick={() => router.back()}
+        onClick={() => router.push("/library")}
       />
       <img
         src="/images/more.svg"

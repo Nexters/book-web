@@ -59,7 +59,9 @@ function MemoCard({ memo, handleClick }) {
       ) : null}
       <div key={id} className={styles.memo_container}>
         <div className={styles.memo_topbar}>
-          <div className={styles.memo_category}>#{category}</div>
+          <div className={styles.memo_category}>
+            #{category === "quote" ? "책 속 문장" : "느낀점"}
+          </div>
           <div className={styles.dropdown_container} ref={outsideRef}>
             <img
               src="/images/more.svg"
