@@ -42,7 +42,7 @@ const Header = ({ title, goBackHandler, isEdit, isDisable, handleClick }) => {
   );
 };
 
-const TextArea = ({ text, setText, setFocus }) => {
+const TextArea = ({ text, setText }) => {
   const textArea = useRef();
   const isInValid = text.length > 150;
 
@@ -60,8 +60,8 @@ const TextArea = ({ text, setText, setFocus }) => {
         value={text}
         ref={textArea}
         onChange={handleResizeHeight}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
+        // onFocus={() => setFocus(true)}
+        // onBlur={() => setFocus(false)}
         className={styles.textArea_text}
       />
       <div
@@ -110,16 +110,16 @@ function Record() {
   const { bookId, id, title, memoText, memoTag, isEditPage } = router.query;
   const [text, setText] = useState(memoText || "");
   const [category, setCategory] = useState(memoTag || "");
-  const [focus, setFocus] = useState(false);
+  //const [focus, setFocus] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
 
   const isDisable = text.length > 150 || category.length == 0;
 
-  useEffect(() => {
-    const result = navigator.userAgent.match(/iPhone | iPad | iPod | Android/i);
-    setIsMobile(result);
-  }, []);
+  // useEffect(() => {
+  //   const result = navigator.userAgent.match(/iPhone | iPad | iPod | Android/i);
+  //   setIsMobile(result);
+  // }, []);
 
   const postMemo = async () => {
     await axios.post(
@@ -181,11 +181,12 @@ function Record() {
         isDisable={isDisable}
         handleClick={finishReading}
       />
-      <TextArea text={text} setText={setText} setFocus={setFocus} />
+      <TextArea text={text} setText={setText} />
       <div className={styles.division}></div>
       <Tags tag={category} setTag={setCategory} />
       <div
-        className={cn(styles.bottom, isMobile && focus && styles.bottom_focus)}
+        //className={cn(styles.bottom, isMobile && focus && styles.bottom_focus)}
+        className={styles.bottom}
       >
         <button
           className={cn(styles.saveButton, isDisable && styles.disableButton)}
