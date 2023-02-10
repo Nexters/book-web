@@ -1,8 +1,7 @@
 import styles from "@/styles/component/BookCard.module.scss";
-import { useRouter } from "next/router";
 
 function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
-  const { id, image, title, memo, author } = book;
+  const { id, isbn, image, title, memoCount, author } = book;
 
   if (isSearchCard) {
     return (
@@ -15,7 +14,10 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
             <span className={styles.author}>{author}</span>
           </div>
         </div>
-        <button onClick={handleClick} className={styles.button}>
+        <button
+          onClick={() => handleClick({ ISBN: String(isbn), title })}
+          className={styles.button}
+        >
           읽기
         </button>
       </div>
@@ -26,18 +28,18 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
         <div className={styles.lib_contents}>
           <img src={image} alt="book_img" className={styles.lib_image} />
           <div className={styles.lib_title}>{title}</div>
+          <div className={styles.lib_memo_count}>메모 {memoCount}</div>
         </div>
-        <div className={styles.lib_memo_count}>메모 {memo}</div>
       </div>
     );
   }
 
   return (
-    <div key={id} className={styles.container}>
+    <div className={styles.container}>
       <img src={image} alt="book_img" className={styles.image} />
       <div className={styles.contents}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.memo_count}>메모 {memo}개 기록 중</div>
+        <div className={styles.memo_count}>메모 {memoCount}개 기록 중</div>
       </div>
       <img
         src="/images/rightArrow.svg"
