@@ -272,11 +272,7 @@ function Memo() {
           </div>
         )}
       </div>
-      {showPopUp && (
-        <div className={styles.bottom}>
-          <div className={styles.popUp}>메모가 수정되었어요.</div>
-        </div>
-      )}
+      {showPopUp && <div className={styles.popUp}>메모가 수정되었어요.</div>}
     </div>
   );
 }
