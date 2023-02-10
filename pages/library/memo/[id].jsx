@@ -130,6 +130,8 @@ function Memo() {
   const router = useRouter();
   const [bookDetail, setBookDetail] = useState([]);
   const [memoList, setMemoList] = useState([]);
+  const [createdAt, setCreatedAt] = useState();
+  const [updatedAt, setUpdatedAt] = useState();
   const [activeTag, setActiveTag] = useState(0);
   const [isModalSmallVisible, setModalSmallVisible] = useState(false);
   const [isModalBookVisible, setModalBookVisible] = useState(false);
@@ -167,6 +169,8 @@ function Memo() {
     );
     setBookDetail(res.data);
     setMemoList(res.data.memos);
+    setCreatedAt(res.data.CreatedAt.substring(0, 10));
+    setUpdatedAt(res.data.UpdatedAt.substring(0, 10));
   };
 
   useEffect(() => {
@@ -209,12 +213,12 @@ function Memo() {
         )}
         <div className={styles.date_container}>
           <div className={styles.date_title}>시작한 날짜</div>
-          <div className={styles.date}>{bookDetail.CreatedAt}</div>
+          <div className={styles.date}>{createdAt}</div>
         </div>
         {memoList.length !== 0 && (
           <div className={styles.date_container}>
             <div className={styles.date_title}>마지막 날짜</div>
-            <div className={styles.date}>{bookDetail.UpdatedAt}</div>
+            <div className={styles.date}>{updatedAt}</div>
           </div>
         )}
       </div>

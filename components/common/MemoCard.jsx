@@ -84,7 +84,9 @@ function MemoCard({ memo, handleClick }) {
           </div>
         </div>
         <div className={styles.memo_text}>{text}</div>
-        <div className={styles.memo_updatedAt}>{UpdatedAt}</div>
+        <div className={styles.memo_updatedAt}>
+          {UpdatedAt.substring(0, 10)}
+        </div>
       </div>
     </div>
   );
