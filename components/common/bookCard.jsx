@@ -25,8 +25,8 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
   } else if (isLibraryCard) {
     return (
       <div key={id} className={styles.lib_container} onClick={handleClick}>
-        <img src={image} alt="book_img" className={styles.lib_image} />
         <div className={styles.lib_contents}>
+          <img src={image} alt="book_img" className={styles.lib_image} />
           <div className={styles.lib_title}>{title}</div>
           <div className={styles.lib_memo_count}>메모 {memoCount}</div>
         </div>
