@@ -21,7 +21,7 @@ const tagArr = [
   },
 ];
 
-const NoMemoList = () => {
+const NoMemoList = ({ bookId, title }) => {
   const router = useRouter();
   return (
     <div className={styles.memo_empty}>
@@ -33,7 +33,9 @@ const NoMemoList = () => {
         radius="12px"
         padding="12px 24px"
         children="메모하러 가기"
-        onClick={() => router.push("/record")}
+        onClick={() =>
+          router.push({ pathname: "/record", query: { id: bookId, title } })
+        }
       />
     </div>
   );
@@ -220,7 +222,7 @@ function Memo() {
       <div>
         <div className={styles.subtitle_memo}>메모</div>
         {bookDetail.memoCount === 0 ? (
-          <NoMemoList />
+          <NoMemoList bookId={bookDetail.ID} title={bookDetail.title} />
         ) : (
           <div>
             <div className={styles.tag_container}>
