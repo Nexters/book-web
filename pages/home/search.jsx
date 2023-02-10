@@ -93,11 +93,14 @@ function Search() {
         },
       },
     );
-    if (books.findIndex((book) => book.ISBN === ISBN) !== -1) {
-      return;
+    const registeredBook = books.find((book) => book.ISBN === ISBN);
+    if (!!registeredBook) {
+      return registeredBook.ID;
     }
 
-    await axios.post(
+    const {
+      data: { ID },
+    } = await axios.post(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/books`,
       {
         ISBN,
@@ -109,6 +112,8 @@ function Search() {
         },
       },
     );
+
+    return ID;
   };
 
   const processReading = async ({ ISBN, title }) => {
@@ -126,10 +131,10 @@ function Search() {
       router.push("/library");
       return;
     }
-    registerBook({ ISBN, title });
+    const id = await registerBook({ ISBN, title });
     router.push({
       pathname: "/record",
-      query: { title },
+      query: { title, id },
     });
   };
 

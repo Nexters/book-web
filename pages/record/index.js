@@ -84,6 +84,7 @@ const Tags = ({ tag, setTag }) => {
       <div className="d-flex">
         {tags.map((item) => (
           <div
+            key={item.eng}
             className={cn(
               styles.tags_keyword,
               item.eng === tag && styles.tags_selected,
