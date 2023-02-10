@@ -257,6 +257,7 @@ function Memo() {
                       {
                         pathname: "/record",
                         query: {
+                          bookId: bookDetail.ID,
                           id: memo.ID,
                           isEditPage: true,
                           memoText: memo.text,

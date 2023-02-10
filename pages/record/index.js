@@ -107,7 +107,7 @@ const Tags = ({ tag, setTag }) => {
 function Record() {
   const router = useRouter();
 
-  const { id, title, memoText, memoTag, isEditPage } = router.query;
+  const { bookId, id, title, memoText, memoTag, isEditPage } = router.query;
   const [text, setText] = useState(memoText || "");
   const [category, setCategory] = useState(memoTag || "");
   const [focus, setFocus] = useState(false);
@@ -161,10 +161,13 @@ function Record() {
   };
 
   const handleEditSave = () => {
-    router.push({
-      pathname: `/library/memo/${id}`,
-      query: { isEdited: true },
-    });
+    router.push(
+      {
+        pathname: `/library/memo/${bookId}`,
+        query: { isEdited: true },
+      },
+      `/library/memo/${bookId}`,
+    );
   };
 
   //NOTE: /record로 바로 접근 시 제목 데이터 가져올 수 없으므로 접근 제한이 필요할 듯 함.
