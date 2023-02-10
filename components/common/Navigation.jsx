@@ -10,12 +10,12 @@ const navButtons = [
     icon: "/images/home.svg",
   },
   {
-    label: "서재",
+    label: "내서재",
     path: "/library",
     icon: "/images/library.svg",
   },
   {
-    label: "내 정보",
+    label: "내정보",
     path: "/mypage",
     icon: "/images/mypage.svg",
   },
