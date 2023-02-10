@@ -27,16 +27,14 @@ const NoMemoList = ({ bookId, title }) => {
     <div className={styles.memo_empty}>
       <img src="/images/article.svg" alt="article" />
       <div className={styles.memo_empty_text}>아직 메모가 없어요</div>
-      <Button
-        backgroundColor="#17171B"
-        color="white"
-        radius="12px"
-        padding="12px 24px"
-        children="메모하러 가기"
+      <button
+        className={styles.btn_gotoMemo}
         onClick={() =>
           router.push({ pathname: "/record", query: { id: bookId, title } })
         }
-      />
+      >
+        메모하러 가기
+      </button>
     </div>
   );
 };

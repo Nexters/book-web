@@ -1,10 +1,12 @@
+@import "./_color.scss";
+
 .bottom {
   padding: 1rem;
   width: 100%;
 }
 
 .startButton {
-  background: #17171b;
+  background: $button-primary;
   width: 100%;
   border-radius: 0.75rem;
   color: #fff;

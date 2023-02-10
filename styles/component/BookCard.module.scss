@@ -1,3 +1,5 @@
+@import "../_color.scss";
+
 .container {
   padding: 1rem 1.5rem;
   display: flex;
@@ -23,7 +25,7 @@
 .title {
   font-weight: 600;
   font-size: 1rem;
-  color: #17171b;
+  color: $text-primary;
   line-height: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -46,14 +48,14 @@
 }
 
 .author {
-  color: #3d4350;
+  color: $text-secondary;
   margin-left: 0.5rem;
 }
 
 .button {
   font-size: 0.875rem;
-  color: #f7f8f9;
-  background: #0a0a0c;
+  color: $background-secondary;
+  background: $button-primary;
   border-radius: 1.125rem;
   padding: 0.5rem 0.75rem;
   height: fit-content;
@@ -79,7 +81,7 @@
 .lib_title {
   font-weight: 600;
   font-size: 0.875rem;
-  color: #3d4350;
+  color: $text-secondary;
   line-height: 1.25rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -97,5 +99,5 @@
 .lib_memo_count {
   font-weight: 400;
   font-size: 0.875rem;
-  color: #6b7180;
+  color: $text-tertiary;
 }

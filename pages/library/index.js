@@ -24,14 +24,12 @@ const NoBookList = () => {
     <div className={styles.book_empty}>
       <img src="/images/article.svg" alt="article" />
       <div className={styles.book_empty_text}>아직 읽고 있는 책이 없어요</div>
-      <Button
-        backgroundColor="#17171B"
-        color="white"
-        radius="12px"
-        padding="12px 24px"
-        children="책 고르러가기"
+      <button
+        className={styles.btn_gotoSearch}
         onClick={() => router.push("/home/search")}
-      />
+      >
+        책 고르러가기
+      </button>
     </div>
   );
 };

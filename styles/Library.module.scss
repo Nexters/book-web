@@ -1,3 +1,5 @@
+@import "./_color.scss";
+
 .status_container {
   display: flex;
   flex-direction: row;
@@ -5,7 +7,7 @@
   max-width: 29.6875rem;
   min-width: 20rem;
   background-color: white;
-  border-bottom: 1px solid #e8eaee;
+  border-bottom: 1px solid $background-tertiary;
   position: fixed;
   top: 0;
   z-index: 2;
@@ -16,13 +18,13 @@
   padding: 0.75rem 1.5rem;
   font-weight: 700;
   font-size: 1.5rem;
-  color: #17171b;
+  color: $text-primary;
   border-bottom: 1px solid #0a0a0c;
   cursor: pointer;
 }
 
 .status_btn_deSelected {
-  color: #ccd0d7;
+  color: $text-disabled;
   border-bottom: none;
 }
 
@@ -34,7 +36,7 @@
   padding: 0 1.5rem;
   font-weight: 400;
   font-size: 0.875rem;
-  color: #6b7180;
+  color: $text-tertiary;
 }
 
 .book_empty {
@@ -48,7 +50,16 @@
 .book_empty_text {
   font-weight: 600;
   font-size: 1rem;
-  color: #6b7180;
+  color: $text-tertiary;
+}
+
+.btn_gotoSearch {
+  background-color: $button-primary;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
 }
 
 .library_container {

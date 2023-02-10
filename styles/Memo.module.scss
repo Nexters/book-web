@@ -1,3 +1,5 @@
+@import "./_color.scss";
+
 @keyframes fadeout {
   from {
     opacity: 1;
@@ -22,7 +24,7 @@
   height: 0.75rem;
   max-width: 29.6875rem;
   min-width: 20rem;
-  background: #f7f8f9;
+  background: $background-secondary;
 }
 
 .modal_overlay {
@@ -57,7 +59,7 @@
 
 .modal_big {
   width: 18.5rem;
-  background-color: #f7f8f9;
+  background-color: $background-secondary;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.24);
   border-radius: 1.5rem;
   padding: 1.5rem;
@@ -67,14 +69,14 @@
 .modal_text_title {
   font-weight: 700;
   font-size: 1.25rem;
-  color: #17171b;
+  color: $text-primary;
   line-height: 1.5rem;
 }
 
 .modal_text_subtitle {
   font-weight: 400;
   font-size: 1rem;
-  color: #3d4350;
+  color: $text-secondary;
   line-height: 1.5rem;
   margin: 0.5rem 0 1.5rem;
 }
@@ -114,7 +116,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #17171b;
+  color: $text-primary;
 }
 
 .book_title {
@@ -131,7 +133,7 @@
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: #3d4350;
+  color: $text-secondary;
 }
 
 .book_img {
@@ -144,11 +146,11 @@
 
 .record_complete {
   padding: 0.75rem 1.5rem;
-  background: #f7f8f9;
+  background: $background-secondary;
   border-radius: 0.75rem;
   font-weight: 600;
   font-size: 1rem;
-  color: #3d4350;
+  color: $text-secondary;
   text-align: center;
 }
 
@@ -167,13 +169,13 @@
 .date_title {
   font-weight: 600;
   font-size: 1rem;
-  color: #3d4350;
+  color: $text-secondary;
 }
 
 .date {
   font-weight: 400;
   font-size: 1rem;
-  color: #3d4350;
+  color: $text-secondary;
 }
 
 .subtitle,
@@ -197,7 +199,16 @@
 .memo_empty_text {
   font-weight: 600;
   font-size: 1rem;
-  color: #6b7180;
+  color: $text-tertiary;
+}
+
+.btn_gotoMemo {
+  background-color: $button-primary;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
 }
 
 .tag_container {
@@ -217,7 +228,7 @@
 .tag_btn_selected,
 .tag_btn_deSelected {
   padding: 0.625rem 1rem;
-  background-color: #17171b;
+  background-color: $button-primary;
   color: white;
   border-radius: 1.5rem;
   font-weight: 600;
@@ -226,15 +237,15 @@
 }
 
 .tag_btn_deSelected {
-  background-color: #f7f8f9;
-  color: #3d4350;
+  background-color: $button-secondary;
+  color: $button-primary;
 }
 
 .memo_list_count {
   margin: 0 1.5rem 1rem 1.5rem;
   font-weight: 400;
   font-size: 0.875rem;
-  color: #6b7180;
+  color: $text-tertiary;
 }
 
 .popUp {
@@ -246,7 +257,7 @@
   padding: 1rem;
   background: #fff;
   filter: drop-shadow(0px 8px 32px rgba(0, 0, 0, 0.24));
-  color: #17171b;
+  color: $text-primary;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 0.75rem;
