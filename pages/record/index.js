@@ -4,6 +4,7 @@ import cn from "classnames";
 import axios from "axios";
 
 import styles from "@/styles/Record.module.scss";
+import { Api } from "@/utils/api";
 
 const tags = [
   { kor: "책 속 문장", eng: "quote" },
@@ -122,33 +123,17 @@ function Record() {
   // }, []);
 
   const postMemo = async () => {
-    await axios.post(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/memos`,
-      {
-        bookId: Number(id),
-        category,
-        text,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
-    );
+    await Api.post(`/memos`, {
+      bookId: Number(id),
+      category,
+      text,
+    });
   };
 
   const finishReading = async () => {
-    await axios.patch(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${id}`,
-      {
-        isReading: false,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
-    );
+    await Api.patch(`/books/${id}`, {
+      isReading: false,
+    });
     router.push("/library");
   };
 

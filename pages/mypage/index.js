@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { Api } from "@/utils/api";
 
 import styles from "@/styles/Mypage.module.scss";
 import Navigation from "@/components/common/Navigation";
@@ -46,11 +46,7 @@ function Mypage() {
   const [userInfo, setUserInfo] = useState([]);
 
   const getUserInfo = async () => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_ENDPOINT}/users`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-      },
-    });
+    const res = await Api.get(`/users`);
     setUserInfo(res.data);
   };
 
