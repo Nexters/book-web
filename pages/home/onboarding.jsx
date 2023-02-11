@@ -21,7 +21,8 @@ function OnBoarding() {
   };
 
   return (
-    <div className={styles.bottom}>
+    <div className={styles.container}>
+      <img src="/images/logo.svg" />
       <button className={styles.startButton} onClick={getUserToken}>
         시작하기
       </button>
