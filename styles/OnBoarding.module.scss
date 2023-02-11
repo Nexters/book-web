@@ -1,18 +1,18 @@
 @import "./_color.scss";
 
 .container {
+  position: relative;
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow-y: hidden;
 }
 
 .startButton {
+  position: fixed;
+  width: 22.5rem;
+  bottom: 1rem;
   background: $button-primary;
-  width: 60%;
   border-radius: 0.75rem;
   color: #fff;
   font-weight: 600;

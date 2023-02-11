@@ -90,7 +90,7 @@ body {
   width: 100%;
   max-width: 475px;
   min-width: 320px;
-  margin-bottom: 64px;
+  //margin-bottom: 64px;
   color: rgb(var(--foreground-rgb));
   font-family: "Pretendard Variable";
   scrollbar-width: none;
@@ -126,6 +126,6 @@ textarea:focus {
     width: 475px;
     position: relative;
     margin: auto;
-    margin-bottom: 64px;
+    //margin-bottom: 64px;
   }
 }

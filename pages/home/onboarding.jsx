@@ -22,7 +22,7 @@ function OnBoarding() {
 
   return (
     <div className={styles.container}>
-      <img src="/images/logo.svg" />
+      <img src="/images/onboarding.png" width="100%" />
       <button className={styles.startButton} onClick={getUserToken}>
         시작하기
       </button>
