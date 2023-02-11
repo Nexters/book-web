@@ -14,5 +14,5 @@ export default function Main() {
     return <OnBoarding />;
   }
 
-  return <OnBoarding />;
+  return <Home />;
 }
