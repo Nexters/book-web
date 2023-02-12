@@ -145,7 +145,11 @@ function Record() {
     setTimeout(() => setShowPopUp(false), 3000);
   };
 
-  const handleEditSave = () => {
+  const handleEditSave = async () => {
+    await Api.patch(`/memos/${id}`, {
+      category,
+      text,
+    });
     router.push(
       {
         pathname: `/library/memo/${bookId}`,
