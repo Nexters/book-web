@@ -139,10 +139,8 @@ function Memo() {
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
 
   const deleteBook = async () => {
-    const res = Api.delete(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${Number(
-        router.asPath.substring(14),
-      )}`,
+    const res = await Api.delete(
+      `/books/${Number(router.asPath.substring(14))}`,
     );
     if (res.status === 202) {
       router.back();
@@ -151,9 +149,9 @@ function Memo() {
 
   const getMemoList = async () => {
     const res = await Api.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${Number(
-        router.asPath.substring(14),
-      )}?category=${tagArr[activeTag].category}`,
+      `/books/${Number(router.asPath.substring(14))}?category=${
+        tagArr[activeTag].category
+      }`,
     );
     setBookDetail(res.data);
     setMemoList(res.data.memos);
