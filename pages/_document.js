@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 
 export default function Document() {
   return (
@@ -10,11 +11,11 @@ export default function Document() {
         />
         <meta property="og:url" content="https://pieceofbook.com" />
         <meta property="og:image" content="/images/og-image.png" />
-
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
         />
+        <GoogleAnalytics />
       </Head>
       <body>
         <Main />
