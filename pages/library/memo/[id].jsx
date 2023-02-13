@@ -147,6 +147,13 @@ function Memo() {
     }
   };
 
+  const deleteMemo = async (memoId) => {
+    const res = await Api.delete(`/memos/${memoId}`);
+    if (res.status === 202) {
+      router.reload();
+    }
+  };
+
   const getMemoList = async () => {
     const res = await Api.get(
       `/books/${Number(router.asPath.substring(14))}?category=${
@@ -238,7 +245,7 @@ function Memo() {
                 <MemoCard
                   key={memo.ID}
                   memo={memo}
-                  handleClick={() =>
+                  handleEditClick={() =>
                     router.push(
                       {
                         pathname: "/record",
@@ -253,6 +260,7 @@ function Memo() {
                       `/edit?memoId=${memo.ID}`,
                     )
                   }
+                  handleDeleteClick={() => deleteMemo(memo.ID)}
                 />
               ))}
           </div>
