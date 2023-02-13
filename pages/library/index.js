@@ -35,7 +35,9 @@ const NoBookList = () => {
 
 function Library() {
   const router = useRouter();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(
+    Number(router.query.activeTab) || 0,
+  );
   const [bookList, setBookList] = useState([]);
   const handleStatusClick = (index) => setActiveIndex(index);
 
