@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import axios from "axios";
+import { Api } from "@/utils/api";
 import { Carousel } from "react-bootstrap";
 
 import BookCard from "@/components/common/bookCard";
@@ -69,14 +69,7 @@ function Home() {
   const getBookList = async () => {
     const {
       data: { books },
-    } = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=true`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
-    );
+    } = await Api.get(`/books?isReading=true`);
     setBooks(books);
   };
 

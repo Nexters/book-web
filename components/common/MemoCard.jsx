@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/component/MemoCard.module.scss";
 import Button from "./Button";
 
-function MemoCard({ memo, handleClick }) {
+function MemoCard({ memo, handleEditClick, handleDeleteClick }) {
   const { id, category, text, UpdatedAt } = memo;
   const [isOptionVisible, setOptionVisible] = useState(false);
   const [isModalMemoVisible, setModalMemoVisible] = useState(false);
@@ -52,6 +52,7 @@ function MemoCard({ memo, handleClick }) {
                 padding="12px 24px"
                 fontSize="16px"
                 children={<div style={{ width: "70px" }}>삭제하기</div>}
+                onClick={handleDeleteClick}
               />
             </div>
           </div>
@@ -71,7 +72,7 @@ function MemoCard({ memo, handleClick }) {
             />
             {isOptionVisible ? (
               <div className={styles.dropdown}>
-                <div className={styles.option_edit} onClick={handleClick}>
+                <div className={styles.option_edit} onClick={handleEditClick}>
                   <img src="/images/edit.svg" alt="edit" />
                   <div>메모 수정하기</div>
                 </div>

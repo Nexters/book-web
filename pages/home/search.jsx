@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { Api } from "@/utils/api";
 
 import useDebounce from "@/components/hook/useDebounce";
 import BookCard from "@/components/common/bookCard";
@@ -85,14 +85,7 @@ function Search() {
   const registerBook = async ({ ISBN, title }) => {
     const {
       data: { books },
-    } = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=true`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
-    );
+    } = await Api.get(`/books?isReading=true`);
     const registeredBook = books.find((book) => book.ISBN === ISBN);
     if (!!registeredBook) {
       return registeredBook.ID;
@@ -100,18 +93,7 @@ function Search() {
 
     const {
       data: { ID },
-    } = await axios.post(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books`,
-      {
-        ISBN,
-        title,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
-    );
+    } = await Api.post(`/books`, { ISBN });
 
     return ID;
   };
@@ -119,14 +101,7 @@ function Search() {
   const processReading = async ({ ISBN, title }) => {
     const {
       data: { books },
-    } = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=false`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
-    );
+    } = await Api.get(`books?isReading=false`);
     if (books.findIndex((book) => book.ISBN === ISBN) !== -1) {
       router.push("/library");
       return;
@@ -139,12 +114,9 @@ function Search() {
   };
 
   const getSearchResult = async () => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/search`,
-      {
-        params: { title: debouncedSearch },
-      },
-    );
+    const { data } = await Api.get(`/books/search`, {
+      params: { title: debouncedSearch },
+    });
     setResults(data);
   };
 
