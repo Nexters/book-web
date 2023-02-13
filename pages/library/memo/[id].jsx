@@ -128,6 +128,7 @@ function Memo() {
   const router = useRouter();
   const [bookDetail, setBookDetail] = useState([]);
   const [memoList, setMemoList] = useState([]);
+  const [memoCount, setMemoCount] = useState();
   const [createdAt, setCreatedAt] = useState();
   const [updatedAt, setUpdatedAt] = useState();
   const [activeTag, setActiveTag] = useState(0);
@@ -162,6 +163,7 @@ function Memo() {
     );
     setBookDetail(res.data);
     setMemoList(res.data.memos);
+    setMemoCount(res.data.memoCount);
     setCreatedAt(res.data.CreatedAt.substring(0, 10));
     setUpdatedAt(res.data.UpdatedAt.substring(0, 10));
   };
@@ -208,7 +210,7 @@ function Memo() {
           <div className={styles.date_title}>시작한 날짜</div>
           <div className={styles.date}>{createdAt}</div>
         </div>
-        {memoList.length !== 0 && (
+        {memoCount !== 0 && (
           <div className={styles.date_container}>
             <div className={styles.date_title}>마지막 날짜</div>
             <div className={styles.date}>{updatedAt}</div>
