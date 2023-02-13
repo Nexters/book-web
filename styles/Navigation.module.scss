@@ -29,9 +29,22 @@
 .active {
   color: $text-primary;
 }
-
 .icon {
-  font-size: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: $text-tertiary;
+}
+.icon_active {
+  background-color: $text-primary;
+}
+.icon_home {
+  mask: url(/images/home.svg) no-repeat center;
+}
+.icon_library {
+  mask: url(/images/library.svg) no-repeat center;
+}
+.icon_mypage {
+  mask: url(/images/mypage.svg) no-repeat center;
 }
 
 .label {

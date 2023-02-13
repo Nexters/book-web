@@ -1,37 +1,39 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import cn from "classnames";
 import styles from "@/styles/Navigation.module.scss";
 
 const navButtons = [
   {
     label: "홈",
     path: "/home",
-    icon: "/images/home.svg",
+    icon: "home",
   },
   {
     label: "내서재",
     path: "/library",
-    icon: "/images/library.svg",
+    icon: "library",
   },
   {
     label: "내정보",
     path: "/mypage",
-    icon: "/images/mypage.svg",
+    icon: "mypage",
   },
 ];
 
 const NavButton = (props) => {
   const router = useRouter();
-
+  const isActive = router.pathname === props.path;
   return (
     <Link href={props.path}>
-      <div
-        className={
-          router.pathname === props.path ? styles.active : styles.navButton
-        }
-      >
-        <img className={styles.icon} src={props.icon} alt="아이콘" />
+      <div className={isActive ? styles.active : styles.navButton}>
+        <div
+          className={cn(
+            styles.icon,
+            styles[`icon_${props.icon}`],
+            isActive && styles.icon_active,
+          )}
+        ></div>
         <div className={styles.label}>{props.label}</div>
       </div>
     </Link>
