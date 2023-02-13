@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 
 export default function Document() {
   return (
@@ -19,7 +18,6 @@ export default function Document() {
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
         />
-        <GoogleAnalytics />
       </Head>
       <body>
         <Main />

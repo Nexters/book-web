@@ -1,10 +1,23 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Script from "next/script";
+import * as gtag from "@/components/lib/gtag";
 
 const GoogleAnalytics = () => {
-  // GA라는 환경변수가 있을 때에만 아래의 jsx 엘리먼트들을 호출하고, 그렇지 않으면 호출하지 않도록 설정
-  if (!process.env.GA) {
-    return null;
-  }
+  const router = useRouter();
+
+  const handleRouteChange = (url) => {
+    gtag.pageview(url);
+  };
+
+  useEffect(() => {
+    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on("hashChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off("hashChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
