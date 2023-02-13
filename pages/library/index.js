@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { Api } from "@/utils/api";
 
 import styles from "@/styles/Library.module.scss";
-import Button from "@/components/common/Button";
 import BookCard from "@/components/common/bookCard";
 import Navigation from "@/components/common/Navigation";
 
@@ -41,13 +40,8 @@ function Library() {
   const handleStatusClick = (index) => setActiveIndex(index);
 
   const getBookList = async () => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books?isReading=${statusArr[activeIndex].isReading}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
+    const res = await Api.get(
+      `/books?isReading=${statusArr[activeIndex].isReading}`,
     );
     setBookList(res.data.books);
   };

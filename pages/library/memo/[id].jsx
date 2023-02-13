@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { Api } from "@/utils/api";
 
 import styles from "@/styles/Memo.module.scss";
 import Button from "@/components/common/Button";
@@ -139,15 +139,8 @@ function Memo() {
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
 
   const deleteBook = async () => {
-    const res = await axios.delete(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${Number(
-        router.asPath.substring(14),
-      )}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
+    const res = await Api.delete(
+      `/books/${Number(router.asPath.substring(14))}`,
     );
     if (res.status === 202) {
       router.back();
@@ -155,15 +148,10 @@ function Memo() {
   };
 
   const getMemoList = async () => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/books/${Number(
-        router.asPath.substring(14),
-      )}?category=${tagArr[activeTag].category}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      },
+    const res = await Api.get(
+      `/books/${Number(router.asPath.substring(14))}?category=${
+        tagArr[activeTag].category
+      }`,
     );
     setBookDetail(res.data);
     setMemoList(res.data.memos);
