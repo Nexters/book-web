@@ -19,6 +19,15 @@ const bannerItems = [
   },
 ];
 
+const Header = ({ handleClick }) => (
+  <div className={styles.header}>
+    <h2 className={styles.title}>홈</h2>
+    <p className={styles.info} onClick={handleClick}>
+      안내
+    </p>
+  </div>
+);
+
 const Banner = () => {
   const [index, setIndex] = useState(0);
 
@@ -77,7 +86,7 @@ function Home() {
 
   return (
     <div>
-      <h2 className={styles.title}>홈</h2>
+      <Header handleClick={() => router.push("/home/onboarding")} />
       <Banner />
       <div>
         <h3 className={styles.subTitle}>읽는 중</h3>
