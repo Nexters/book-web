@@ -78,7 +78,7 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <Header handleClick={() => router.push("/home/onboarding")} />
       <Banner />
       <div>

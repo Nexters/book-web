@@ -51,7 +51,7 @@ function Library() {
   }, [activeIndex]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.status_container}>
         {statusArr.map((status, index) => (
           <div

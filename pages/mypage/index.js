@@ -55,12 +55,12 @@ function Mypage() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.title}>내정보</div>
       <div className={styles.status_container}>
         <Status count={userInfo.readCount} type="완독" />
         <Status count={userInfo.memoCount} type="메모" />
-        <Status count={userInfo.duration + "d"} type="읽은날" />
+        <Status count={userInfo.duration + "일"} type="읽은날" />
       </div>
       <div className={styles.division}></div>
       <div>
