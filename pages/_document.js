@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <title>책조각</title>
         <meta
           property="og:title"
           content="세상에서 제일 쉬운 독서기록, 책조각"
