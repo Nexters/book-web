@@ -20,8 +20,7 @@ const Header = ({ title, goBackHandler, isEdit, isDisable, handleClick }) => {
       <h6 className={styles.header_title}>{isEdit ? "메모 수정" : title}</h6>
       {isEdit ? (
         <button
-          // NOTE : 메모 수정 API 붙일 예정
-          // onClick={}
+          onClick={handleClick}
           className={cn(
             styles.boldText,
             styles.header_button_edit,
@@ -61,8 +60,6 @@ const TextArea = ({ text, setText }) => {
         value={text}
         ref={textArea}
         onChange={handleResizeHeight}
-        // onFocus={() => setFocus(true)}
-        // onBlur={() => setFocus(false)}
         className={styles.textArea_text}
       />
       <div
@@ -111,16 +108,9 @@ function Record() {
   const { bookId, id, title, memoText, memoTag, isEditPage } = router.query;
   const [text, setText] = useState(memoText || "");
   const [category, setCategory] = useState(memoTag || "");
-  //const [focus, setFocus] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
-  // const [isMobile, setIsMobile] = useState(false);
 
   const isDisable = text.length > 150 || category.length == 0;
-
-  // useEffect(() => {
-  //   const result = navigator.userAgent.match(/iPhone | iPad | iPod | Android/i);
-  //   setIsMobile(result);
-  // }, []);
 
   const postMemo = async () => {
     await Api.post(`/memos`, {
@@ -168,22 +158,21 @@ function Record() {
         goBackHandler={() => router.back()}
         isEdit={isEditPage}
         isDisable={isDisable}
-        handleClick={finishReading}
+        handleClick={isEditPage ? handleEditSave : finishReading}
       />
       <TextArea text={text} setText={setText} />
       <div className={styles.division}></div>
       <Tags tag={category} setTag={setCategory} />
-      <div
-        //className={cn(styles.bottom, isMobile && focus && styles.bottom_focus)}
-        className={styles.bottom}
-      >
-        <button
-          className={cn(styles.saveButton, isDisable && styles.disableButton)}
-          disabled={isDisable}
-          onClick={isEditPage ? handleEditSave : handleSave}
-        >
-          메모 저장하기
-        </button>
+      <div className={styles.bottom}>
+        {!isEditPage && (
+          <button
+            className={cn(styles.saveButton, isDisable && styles.disableButton)}
+            disabled={isDisable}
+            onClick={handleSave}
+          >
+            메모 저장하기
+          </button>
+        )}
       </div>
     </div>
   );
