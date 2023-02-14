@@ -110,7 +110,8 @@ function Record() {
   const [category, setCategory] = useState(memoTag || "");
   const [showPopUp, setShowPopUp] = useState(false);
 
-  const isDisable = text.length > 150 || category.length == 0;
+  const isDisable =
+    text.length === 0 || text.length > 150 || category.length == 0;
 
   const postMemo = async () => {
     await Api.post(`/memos`, {
