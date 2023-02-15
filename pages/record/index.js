@@ -125,7 +125,7 @@ function Record() {
     await Api.patch(`/books/${id}`, {
       isReading: false,
     });
-    router.push("/library");
+    router.push({ pathname: "/library", query: { activeTab: 1 } }, "/library");
   };
 
   const handleSave = () => {

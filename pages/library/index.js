@@ -35,7 +35,9 @@ const NoBookList = () => {
 
 function Library() {
   const router = useRouter();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(
+    Number(router.query.activeTab) || 0,
+  );
   const [bookList, setBookList] = useState([]);
   const handleStatusClick = (index) => setActiveIndex(index);
 
@@ -51,7 +53,7 @@ function Library() {
   }, [activeIndex]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.status_container}>
         {statusArr.map((status, index) => (
           <div

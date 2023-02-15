@@ -81,7 +81,7 @@ function Home() {
     <div>
       <Header handleClick={() => router.push("/home/onboarding")} />
       <Banner />
-      <div>
+      <div className={styles.container}>
         <h3 className={styles.subTitle}>읽는 중</h3>
         {books.map((book) => (
           <BookCard
