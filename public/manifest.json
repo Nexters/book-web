@@ -1,0 +1,63 @@
+{
+  "theme_color": "#00875f",
+  "background_color": "#00875f",
+  "display": "browser",
+  "scope": "/home",
+  "start_url": "/",
+  "name": "Piece Of Book",
+  "short_name": "\ucc45\uc870\uac01",
+  "description": "\uc138\uc0c1\uc5d0\uc11c \uc81c\uc77c \uc26c\uc6b4 \ub3c5\uc11c \uae30\ub85d",
+  "icons": [
+    {
+      "src": "/icon/apple-touch-icon-57x57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/apple-touch-icon-60x60.png",
+      "sizes": "60x60",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/apple-touch-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/apple-touch-icon-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/apple-touch-icon-114x114.png",
+      "sizes": "114x114",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/apple-touch-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/icon",
+      "purpose": "any maskable"
+    }
+  ]
+}
