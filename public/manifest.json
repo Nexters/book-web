@@ -1,7 +1,7 @@
 {
   "theme_color": "#00875f",
   "background_color": "#00875f",
-  "display": "browser",
+  "display": "standalone",
   "scope": "/home",
   "start_url": "/",
   "name": "Piece Of Book",

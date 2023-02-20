@@ -1,7 +1,12 @@
 const path = require("path");
 
-const withPlugins = require("next-compose-plugins");
-const withPWA = require("next-pwa");
+const withPWA = require("next-pwa")({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  // register: true,
+  // scope: '/app',
+  // sw: 'service-worker.js',
+});
 
 const nextConfig = {
   reactStrictMode: true,
@@ -11,16 +16,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins(
-  [
-    [
-      withPWA,
-      {
-        pwa: {
-          dest: "public",
-        },
-      },
-    ],
-  ],
-  nextConfig,
-);
+module.exports = withPWA(nextConfig);
