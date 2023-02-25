@@ -59,12 +59,31 @@ const Header = ({ moreHandler }) => {
   );
 };
 
-const Dropdown = ({ isDropdownVisible, deleteHandler }) => {
+const Dropdown = ({
+  isDropdownVisible,
+  isReading,
+  deleteHandler,
+  completeHandler,
+  cancelHandler,
+}) => {
   if (isDropdownVisible) {
     return (
-      <div className={styles.dropdown} onClick={deleteHandler}>
-        <img src="/images/delete.svg" alt="delete" />
-        <div>책 삭제하기</div>
+      <div className={styles.dropdown}>
+        <div className={styles.dropdown_text_delete} onClick={deleteHandler}>
+          <img src="/images/delete.svg" alt="delete" />
+          <div>책 삭제하기</div>
+        </div>
+        {isReading ? (
+          <div className={styles.dropdown_text} onClick={completeHandler}>
+            <img src="/images/check_s.svg" alt="check_s" />
+            <div>완독하기</div>
+          </div>
+        ) : (
+          <div className={styles.dropdown_text} onClick={cancelHandler}>
+            <img src="/images/reset.svg" alt="reset" />
+            <div>완독 취소하기</div>
+          </div>
+        )}
       </div>
     );
   }
@@ -185,6 +204,7 @@ function Memo() {
       <Dropdown
         isDropdownVisible={isDropdownVisible}
         deleteHandler={handleModalBook}
+        isReading={bookDetail.isReading}
       />
       <ModalBook
         isModalBookVisible={isModalBookVisible}
