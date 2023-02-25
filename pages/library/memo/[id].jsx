@@ -59,10 +59,10 @@ const Header = ({ moreHandler }) => {
   );
 };
 
-const ModalSmall = ({ isModalSmallVisible, clickHandler }) => {
-  if (isModalSmallVisible) {
+const Dropdown = ({ isDropdownVisible, deleteHandler }) => {
+  if (isDropdownVisible) {
     return (
-      <div className={styles.modal_small} onClick={clickHandler}>
+      <div className={styles.dropdown} onClick={deleteHandler}>
         <img src="/images/delete.svg" alt="delete" />
         <div>책 삭제하기</div>
       </div>
@@ -132,11 +132,11 @@ function Memo() {
   const [createdAt, setCreatedAt] = useState();
   const [updatedAt, setUpdatedAt] = useState();
   const [activeTag, setActiveTag] = useState(0);
-  const [isModalSmallVisible, setModalSmallVisible] = useState(false);
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isModalBookVisible, setModalBookVisible] = useState(false);
   const [showPopUp, setShowPopUp] = useState(router.query.isEdited || false);
   const handleTagClick = (index) => setActiveTag(index);
-  const handleModalSmall = () => setModalSmallVisible(!isModalSmallVisible);
+  const handleDropdown = () => setDropdownVisible(!isDropdownVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
 
   const deleteBook = async () => {
@@ -181,16 +181,16 @@ function Memo() {
 
   return (
     <div className={styles.container}>
-      <Header moreHandler={handleModalSmall} />
-      <ModalSmall
-        isModalSmallVisible={isModalSmallVisible}
-        clickHandler={handleModalBook}
+      <Header moreHandler={handleDropdown} />
+      <Dropdown
+        isDropdownVisible={isDropdownVisible}
+        deleteHandler={handleModalBook}
       />
       <ModalBook
         isModalBookVisible={isModalBookVisible}
         cancelHandler={() => {
           setModalBookVisible(false);
-          setModalSmallVisible(false);
+          setDropdownVisible(false);
         }}
         deleteHandler={deleteBook}
       />
