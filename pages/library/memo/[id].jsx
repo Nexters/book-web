@@ -158,6 +158,20 @@ function Memo() {
   const handleDropdown = () => setDropdownVisible(!isDropdownVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
 
+  const completeBook = async () => {
+    await Api.patch(`/books/${Number(router.asPath.substring(14))}`, {
+      isReading: false,
+    });
+    router.push({ pathname: "/library", query: { activeTab: 1 } }, "/library");
+  };
+
+  const cancelCompleteBook = async () => {
+    await Api.patch(`/books/${Number(router.asPath.substring(14))}`, {
+      isReading: true,
+    });
+    router.push("/library");
+  };
+
   const deleteBook = async () => {
     const res = await Api.delete(
       `/books/${Number(router.asPath.substring(14))}`,
@@ -205,6 +219,8 @@ function Memo() {
         isDropdownVisible={isDropdownVisible}
         deleteHandler={handleModalBook}
         isReading={bookDetail.isReading}
+        completeHandler={completeBook}
+        cancelHandler={cancelCompleteBook}
       />
       <ModalBook
         isModalBookVisible={isModalBookVisible}
