@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
-import axios from "axios";
 
 import styles from "@/styles/Record.module.scss";
 import { Api } from "@/utils/api";
+import Modal from "@/components/common/Modal";
 
 const tags = [
   { kor: "책 속 문장", eng: "quote" },
@@ -109,6 +109,10 @@ function Record() {
   const [text, setText] = useState(memoText || "");
   const [category, setCategory] = useState(memoTag || "");
   const [showPopUp, setShowPopUp] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showFinishModal = () => setIsModalVisible(true);
+  const closeFinishModal = () => setIsModalVisible(false);
 
   const isDisable =
     text.length === 0 || text.length > 150 || category.length == 0;
@@ -159,7 +163,7 @@ function Record() {
         goBackHandler={() => router.back()}
         isEdit={isEditPage}
         isDisable={isDisable}
-        handleClick={isEditPage ? handleEditSave : finishReading}
+        handleClick={isEditPage ? handleEditSave : showFinishModal}
       />
       <TextArea text={text} setText={setText} />
       <div className={styles.division}></div>
@@ -175,6 +179,15 @@ function Record() {
           </button>
         )}
       </div>
+      {isModalVisible && (
+        <Modal
+          title="책을 완독 처리할까요?"
+          subtitle="완독 처리한 책은 서재 탭에서 완독 취소할 수 있습니다."
+          confirmMessage="완독하기"
+          cancelHandler={closeFinishModal}
+          confirmHandler={finishReading}
+        />
+      )}
     </div>
   );
 }

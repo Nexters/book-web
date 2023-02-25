@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { Api } from "@/utils/api";
 
 import styles from "@/styles/Memo.module.scss";
-import Button from "@/components/common/Button";
 import MemoCard from "@/components/common/MemoCard";
+import Modal from "@/components/common/Modal";
 
 const tagArr = [
   {
@@ -84,41 +84,6 @@ const Dropdown = ({
             <div>완독 취소하기</div>
           </div>
         )}
-      </div>
-    );
-  }
-};
-
-const ModalBook = ({ isModalBookVisible, cancelHandler, deleteHandler }) => {
-  if (isModalBookVisible) {
-    return (
-      <div className={styles.modal_overlay}>
-        <div className={styles.modal_big}>
-          <div className={styles.modal_text_title}>책을 삭제할까요?</div>
-          <div className={styles.modal_text_subtitle}>
-            삭제한 책은 되돌릴 수 없어요
-          </div>
-          <div className={styles.modal_btn_container}>
-            <Button
-              backgroundColor="#E8EAEE"
-              color="#3D4350"
-              radius="12px"
-              padding="12px 24px"
-              fontSize="16px"
-              children={<div style={{ width: "70px" }}>취소</div>}
-              onClick={cancelHandler}
-            />
-            <Button
-              backgroundColor="#CF3644"
-              color="#FFFFFF"
-              radius="12px"
-              padding="12px 24px"
-              fontSize="16px"
-              children={<div style={{ width: "70px" }}>삭제하기</div>}
-              onClick={deleteHandler}
-            />
-          </div>
-        </div>
       </div>
     );
   }
@@ -222,14 +187,18 @@ function Memo() {
         completeHandler={completeBook}
         cancelHandler={cancelCompleteBook}
       />
-      <ModalBook
-        isModalBookVisible={isModalBookVisible}
-        cancelHandler={() => {
-          setModalBookVisible(false);
-          setDropdownVisible(false);
-        }}
-        deleteHandler={deleteBook}
-      />
+      {isModalBookVisible && (
+        <Modal
+          title="책을 삭제할까요?"
+          subtitle="삭제한 책을 되돌릴 수 없어요"
+          confirmMessage="삭제하기"
+          cancelHandler={() => {
+            setModalBookVisible(false);
+            setModalSmallVisible(false);
+          }}
+          confirmHandler={deleteBook}
+        />
+      )}
       <BookInfo
         title={bookDetail.title}
         author={bookDetail.author}

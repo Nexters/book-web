@@ -103,7 +103,10 @@ function Search() {
       data: { books },
     } = await Api.get(`books?isReading=false`);
     if (books.findIndex((book) => book.ISBN === ISBN) !== -1) {
-      router.push("/library");
+      router.push(
+        { pathname: "/library", query: { activeTab: 1 } },
+        "/library",
+      );
       return;
     }
     const id = await registerBook({ ISBN, title });

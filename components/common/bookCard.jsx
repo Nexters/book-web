@@ -35,7 +35,7 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <img src={image} alt="book_img" className={styles.image} />
       <div className={styles.contents}>
         <div className={styles.title}>{title}</div>
@@ -45,7 +45,6 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
         src="/images/rightArrow.svg"
         alt="detail"
         className={styles.detail}
-        onClick={handleClick}
       />
     </div>
   );
