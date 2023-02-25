@@ -59,12 +59,31 @@ const Header = ({ moreHandler }) => {
   );
 };
 
-const ModalSmall = ({ isModalSmallVisible, clickHandler }) => {
-  if (isModalSmallVisible) {
+const Dropdown = ({
+  isDropdownVisible,
+  isReading,
+  deleteHandler,
+  completeHandler,
+  cancelHandler,
+}) => {
+  if (isDropdownVisible) {
     return (
-      <div className={styles.modal_small} onClick={clickHandler}>
-        <img src="/images/delete.svg" alt="delete" />
-        <div>책 삭제하기</div>
+      <div className={styles.dropdown}>
+        <div className={styles.dropdown_text_delete} onClick={deleteHandler}>
+          <img src="/images/delete.svg" alt="delete" />
+          <div>책 삭제하기</div>
+        </div>
+        {isReading ? (
+          <div className={styles.dropdown_text} onClick={completeHandler}>
+            <img src="/images/check_s.svg" alt="check_s" />
+            <div>완독하기</div>
+          </div>
+        ) : (
+          <div className={styles.dropdown_text} onClick={cancelHandler}>
+            <img src="/images/reset.svg" alt="reset" />
+            <div>완독 취소하기</div>
+          </div>
+        )}
       </div>
     );
   }
@@ -132,12 +151,26 @@ function Memo() {
   const [createdAt, setCreatedAt] = useState();
   const [updatedAt, setUpdatedAt] = useState();
   const [activeTag, setActiveTag] = useState(0);
-  const [isModalSmallVisible, setModalSmallVisible] = useState(false);
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isModalBookVisible, setModalBookVisible] = useState(false);
   const [showPopUp, setShowPopUp] = useState(router.query.isEdited || false);
   const handleTagClick = (index) => setActiveTag(index);
-  const handleModalSmall = () => setModalSmallVisible(!isModalSmallVisible);
+  const handleDropdown = () => setDropdownVisible(!isDropdownVisible);
   const handleModalBook = () => setModalBookVisible(!isModalBookVisible);
+
+  const completeBook = async () => {
+    await Api.patch(`/books/${Number(router.asPath.substring(14))}`, {
+      isReading: false,
+    });
+    router.push({ pathname: "/library", query: { activeTab: 1 } }, "/library");
+  };
+
+  const cancelCompleteBook = async () => {
+    await Api.patch(`/books/${Number(router.asPath.substring(14))}`, {
+      isReading: true,
+    });
+    router.push("/library");
+  };
 
   const deleteBook = async () => {
     const res = await Api.delete(
@@ -181,16 +214,19 @@ function Memo() {
 
   return (
     <div className={styles.container}>
-      <Header moreHandler={handleModalSmall} />
-      <ModalSmall
-        isModalSmallVisible={isModalSmallVisible}
-        clickHandler={handleModalBook}
+      <Header moreHandler={handleDropdown} />
+      <Dropdown
+        isDropdownVisible={isDropdownVisible}
+        deleteHandler={handleModalBook}
+        isReading={bookDetail.isReading}
+        completeHandler={completeBook}
+        cancelHandler={cancelCompleteBook}
       />
       <ModalBook
         isModalBookVisible={isModalBookVisible}
         cancelHandler={() => {
           setModalBookVisible(false);
-          setModalSmallVisible(false);
+          setDropdownVisible(false);
         }}
         deleteHandler={deleteBook}
       />
