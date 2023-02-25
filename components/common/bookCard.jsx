@@ -45,7 +45,6 @@ function BookCard({ book, isSearchCard, isLibraryCard, handleClick }) {
         src="/images/rightArrow.svg"
         alt="detail"
         className={styles.detail}
-        onClick={handleClick}
       />
     </div>
   );

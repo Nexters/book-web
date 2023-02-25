@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/component/MemoCard.module.scss";
-import Button from "./Button";
 import Modal from "./Modal";
 
 function MemoCard({ memo, handleEditClick, handleDeleteClick }) {

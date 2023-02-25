@@ -81,7 +81,10 @@ function Home() {
     <div>
       <Header handleClick={() => router.push("/home/onboarding")} />
       <Banner />
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        onClick={() => router.push("/home/search")}
+      >
         <h3 className={styles.subTitle}>읽는 중</h3>
         {books.map((book) => (
           <BookCard
@@ -95,7 +98,7 @@ function Home() {
             }
           />
         ))}
-        <AddBookButton handleClick={() => router.push("/home/search")} />
+        <AddBookButton />
       </div>
       <Navigation />
     </div>

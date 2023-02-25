@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Api } from "@/utils/api";
 
 import styles from "@/styles/Memo.module.scss";
-import Button from "@/components/common/Button";
 import MemoCard from "@/components/common/MemoCard";
 import Modal from "@/components/common/Modal";
 
