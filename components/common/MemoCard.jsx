@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/component/MemoCard.module.scss";
 import Button from "./Button";
+import Modal from "./Modal";
 
 function MemoCard({ memo, handleEditClick, handleDeleteClick }) {
   const { id, category, text, UpdatedAt } = memo;
@@ -26,38 +27,15 @@ function MemoCard({ memo, handleEditClick, handleDeleteClick }) {
 
   return (
     <div>
-      {isModalMemoVisible ? (
-        <div className={styles.modal_overlay}>
-          <div className={styles.modal_big}>
-            <div className={styles.modal_text_title}>메모를 삭제할까요?</div>
-            <div className={styles.modal_text_subtitle}>
-              삭제한 메모는 되돌릴 수 없어요
-            </div>
-            <div className={styles.modal_btn_container}>
-              <Button
-                backgroundColor="#E8EAEE"
-                color="#3D4350"
-                radius="12px"
-                padding="12px 24px"
-                fontSize="16px"
-                children={<div style={{ width: "70px" }}>취소</div>}
-                onClick={() => {
-                  setModalMemoVisible(false);
-                }}
-              />
-              <Button
-                backgroundColor="#CF3644"
-                color="#FFFFFF"
-                radius="12px"
-                padding="12px 24px"
-                fontSize="16px"
-                children={<div style={{ width: "70px" }}>삭제하기</div>}
-                onClick={handleDeleteClick}
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {isModalMemoVisible && (
+        <Modal
+          title="메모를 삭제할까요?"
+          subtitle="삭제한 메모는 되돌릴 수 없어요"
+          confirmMessage="삭제하기"
+          cancelHandler={() => setModalMemoVisible(false)}
+          confirmHandler={handleDeleteClick}
+        />
+      )}
       <div key={id} className={styles.memo_container}>
         <div className={styles.memo_topbar}>
           <div className={styles.memo_category}>
