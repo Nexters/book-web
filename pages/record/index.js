@@ -181,11 +181,12 @@ function Record() {
       </div>
       {isModalVisible && (
         <Modal
-          title="책을 완독 처리할까요?"
-          subtitle="완독 처리한 책은 서재 탭에서 완독 취소할 수 있습니다."
+          title="책을 다 읽었나요?"
+          subtitle="잘못눌러도 괜찮아요. 내 서재 탭에서 되돌릴 수 있어요."
           confirmMessage="완독하기"
           cancelHandler={closeFinishModal}
           confirmHandler={finishReading}
+          isConfirmModal
         />
       )}
     </div>
