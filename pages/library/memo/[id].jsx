@@ -194,7 +194,7 @@ function Memo() {
           confirmMessage="삭제하기"
           cancelHandler={() => {
             setModalBookVisible(false);
-            setModalSmallVisible(false);
+            setDropdownVisible(false);
           }}
           confirmHandler={deleteBook}
         />

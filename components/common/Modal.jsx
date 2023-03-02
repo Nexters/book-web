@@ -7,6 +7,7 @@ const Modal = ({
   confirmMessage,
   cancelHandler,
   confirmHandler,
+  isConfirmModal,
 }) => (
   <div className={styles.modal_overlay}>
     <div className={styles.modal_big}>
@@ -23,7 +24,7 @@ const Modal = ({
           onClick={cancelHandler}
         />
         <Button
-          backgroundColor="#CF3644"
+          backgroundColor={isConfirmModal ? " #00875F" : "#CF3644"}
           color="#FFFFFF"
           radius="12px"
           padding="12px 24px"
