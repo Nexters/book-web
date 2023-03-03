@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Api } from "@/utils/api";
 
 import useDebounce from "@/components/hook/useDebounce";
+import useIntersectionObserver from "@/components/hook/useIntersectionObserver";
 import BookCard from "@/components/common/bookCard";
 import data from "@/public/data/recommend.json";
 import styles from "@/styles/Search.module.scss";
@@ -80,6 +81,9 @@ function Search() {
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  //const [bottomRef, setBottomRef] = useState(null);
   const debouncedSearch = useDebounce(search, 300);
 
   const registerBook = async ({ ISBN, title }) => {
@@ -116,18 +120,34 @@ function Search() {
     });
   };
 
-  const getSearchResult = async () => {
+  const getInitialResult = async () => {
     const { data } = await Api.get(`/books/search`, {
       params: { title: debouncedSearch },
     });
     setResults(data);
   };
 
+  const getSearchResult = async () => {
+    const { data } = await Api.get(`/books/search`, {
+      params: { title: debouncedSearch, page: page + 1 },
+    });
+    setPage(page + 1);
+    setResults([...results, ...data]);
+  };
+
+  const fetchNextPage = async () => {
+    setLoading(true);
+    await getSearchResult();
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (debouncedSearch) {
-      getSearchResult();
+      getInitialResult();
     }
   }, [debouncedSearch]);
+
+  const bottomRef = useIntersectionObserver(fetchNextPage);
 
   return (
     <div>
@@ -155,6 +175,7 @@ function Search() {
                   handleClick={processReading}
                 />
               ))}
+              {!loading && <div ref={bottomRef} />}
             </div>
           )}
         </>
