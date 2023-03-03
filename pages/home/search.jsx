@@ -127,7 +127,6 @@ function Search() {
   };
 
   const getSearchResult = async () => {
-    console.log(page);
     const { data } = await Api.get(`/books/search`, {
       params: { title: debouncedSearch, page: page + 1 },
     });
