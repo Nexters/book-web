@@ -83,7 +83,6 @@ function Search() {
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  //const [bottomRef, setBottomRef] = useState(null);
   const debouncedSearch = useDebounce(search, 300);
 
   const registerBook = async ({ ISBN, title }) => {
@@ -128,6 +127,7 @@ function Search() {
   };
 
   const getSearchResult = async () => {
+    console.log(page);
     const { data } = await Api.get(`/books/search`, {
       params: { title: debouncedSearch, page: page + 1 },
     });
@@ -143,6 +143,8 @@ function Search() {
 
   useEffect(() => {
     if (debouncedSearch) {
+      setResults([]);
+      setPage(1);
       getInitialResult();
     }
   }, [debouncedSearch]);
