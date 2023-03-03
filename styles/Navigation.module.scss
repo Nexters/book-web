@@ -7,13 +7,15 @@
   background-color: white;
   border-top: 1px solid #cacaca;
   width: 100%;
-  height: 4rem;
+  height: fit-content;
   max-width: 29.6875rem;
   min-width: 20rem;
-  padding: 0.625rem 0;
+  padding-top: 0.625rem;
   position: fixed;
   bottom: 0;
   z-index: 2;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .navButton,
@@ -25,6 +27,7 @@
   height: 100%;
   color: $text-tertiary;
   cursor: pointer;
+  padding-bottom: 0.625rem;
 }
 .active {
   color: $text-primary;

@@ -11,6 +11,10 @@ export default function Document() {
         />
         <meta property="og:url" content="https://pieceofbook.com" />
         <meta property="og:image" content="/images/og-image.png" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
