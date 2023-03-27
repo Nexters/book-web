@@ -1,38 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 책조각<img src="https://user-images.githubusercontent.com/61882016/227835133-44854942-7d5d-447c-a65f-04f88871c2ab.png" align=left width=100>
 
-## Getting Started
+> 세상에서 제일 쉬운 독서 기록, 책조각
 
-First, run the development server:
+<br />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## About
+책을 읽으며 구절이나 느낀점을 짧게 메모하면, 독서 기록을 완성해 줍니다.  
+트위터에 글을 쓰듯 짧게 조금씩 생각을 메모하면, 완독 후 나의 기록을 확인할 수 있습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Preview
+<img width='15%' src="https://user-images.githubusercontent.com/61882016/227835588-00c39664-11ab-48a8-8f84-2630500b0897.png" /> <img width='15%' src="https://user-images.githubusercontent.com/61882016/227835608-1029423f-8336-486c-a9e1-4ef09bffa3db.png" /> <img width='15%' src="https://user-images.githubusercontent.com/61882016/227835607-b6a5c02d-01b2-483c-8deb-85b86033983c.png" /> <img width='15%' src="https://user-images.githubusercontent.com/61882016/227835603-5652f247-6f14-495c-bd1d-76000dcb8e87.png" /> <img width='15%' src="https://user-images.githubusercontent.com/61882016/227835600-892cb050-13f0-4bed-a1c7-b46b00acc6b8.png" /> <img width='15%' src="https://user-images.githubusercontent.com/61882016/227835595-9bc34a10-562f-4f57-883e-5fbeb62a20f5.png" />
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+<br />
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Download
+<a href='https://play.google.com/store/apps/details?id=com.pieceofbook.app'><img alt='다운로드하기 Google Play' width='250px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+[![instagram](https://img.shields.io/badge/instagram-E4405F?style=flat-square&logo=Instagram&logoColor=white&link=https://www.instagram.com/pieceofbook.official/)](https://www.instagram.com/pieceofbook.official/)
